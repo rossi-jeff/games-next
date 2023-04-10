@@ -14,11 +14,12 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<nav>
+				<nav className="flex flex-wrap justify-between mx-2">
 					<Link href="/">Home</Link>
 					<Link href="/yacht">Yacht</Link>
 					<Link href="/guessword">Guess Word</Link>
 					<Link href="/codebreaker">Code Breaker</Link>
+					<Link href="/freecell">Free Cell</Link>
 				</nav>
 				{children}
 			</body>
