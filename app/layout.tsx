@@ -21,6 +21,7 @@ export default function RootLayout({
 					<Link href="/codebreaker">Code Breaker</Link>
 					<Link href="/freecell">Free Cell</Link>
 					<Link href="/klondike">Klondike</Link>
+					<Link href="/seabattle">Sea Battle</Link>
 				</nav>
 				{children}
 			</body>
