@@ -23,6 +23,7 @@ export default function RootLayout({
 					<Link href="/klondike">Klondike</Link>
 					<Link href="/seabattle">Sea Battle</Link>
 					<Link href="/hangman">Hang Man</Link>
+					<Link href="/concentration">Concentration</Link>
 				</nav>
 				{children}
 			</body>
