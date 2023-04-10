@@ -24,6 +24,7 @@ export default function RootLayout({
 					<Link href="/seabattle">Sea Battle</Link>
 					<Link href="/hangman">Hang Man</Link>
 					<Link href="/concentration">Concentration</Link>
+					<Link href="/tengrand">Ten Grand</Link>
 				</nav>
 				{children}
 			</body>
