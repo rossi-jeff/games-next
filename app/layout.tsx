@@ -20,6 +20,7 @@ export default function RootLayout({
 					<Link href="/guessword">Guess Word</Link>
 					<Link href="/codebreaker">Code Breaker</Link>
 					<Link href="/freecell">Free Cell</Link>
+					<Link href="/klondike">Klondike</Link>
 				</nav>
 				{children}
 			</body>
