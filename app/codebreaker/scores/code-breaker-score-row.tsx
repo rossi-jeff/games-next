@@ -6,13 +6,15 @@ export default function CodeBreakerScoreRow({
 	code_breaker: CodeBreaker
 }) {
 	return (
-		<div className="flex flex-wrap px-2 justify-between">
-			<div>{code_breaker.id}</div>
-			<div>{code_breaker.user ? code_breaker.user.UserName : 'Anonymous'}</div>
-			<div>{code_breaker.Status}</div>
-			<div>{code_breaker.Score}</div>
-			<div>{code_breaker.Colors}</div>
-			<div>{code_breaker.Columns}</div>
+		<div className="score-row">
+			<div className="cell-left">{code_breaker.id}</div>
+			<div className="cell-center">
+				{code_breaker.user ? code_breaker.user.UserName : 'Anonymous'}
+			</div>
+			<div className="cell-center">{code_breaker.Status}</div>
+			<div className="cell-center">{code_breaker.Score}</div>
+			<div className="cell-center">{code_breaker.Colors}</div>
+			<div className="cell-right">{code_breaker.Columns}</div>
 		</div>
 	)
 }

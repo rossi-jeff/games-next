@@ -7,13 +7,19 @@ export default function GuessWordScoreRow({
 	guess_word: GuessWord
 }) {
 	return (
-		<div className="flex flex-wrap px-2 justify-between">
-			<div>{guess_word.id}</div>
-			<div>{guess_word.user ? guess_word.user.UserName : 'Anonymous'}</div>
-			<div>{guess_word.Status}</div>
-			<div>{guess_word.Score}</div>
-			<div>{guess_word.word ? guess_word.word.Word : 'N/A'}</div>
-			<div>{guess_word.word ? guess_word.word.Length : 0}</div>
+		<div className="score-row">
+			<div className="cell-left">{guess_word.id}</div>
+			<div className="cell-center">
+				{guess_word.user ? guess_word.user.UserName : 'Anonymous'}
+			</div>
+			<div className="cell-center">{guess_word.Status}</div>
+			<div className="cell-center">{guess_word.Score}</div>
+			<div className="cell-center">
+				{guess_word.word ? guess_word.word.Word : 'N/A'}
+			</div>
+			<div className="cell-right">
+				{guess_word.word ? guess_word.word.Length : 0}
+			</div>
 		</div>
 	)
 }

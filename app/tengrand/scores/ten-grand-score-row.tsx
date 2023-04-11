@@ -6,11 +6,13 @@ export default function TenGrandScoreRow({
 	ten_grand: TenGrand
 }) {
 	return (
-		<div className="flex flex-wrap px-2 justify-between">
-			<div>{ten_grand.id}</div>
-			<div>{ten_grand.user ? ten_grand.user.UserName : 'Anonymous'}</div>
-			<div>{ten_grand.Status}</div>
-			<div>{ten_grand.Score}</div>
+		<div className="score-row">
+			<div className="cell-left">{ten_grand.id}</div>
+			<div className="cell-center">
+				{ten_grand.user ? ten_grand.user.UserName : 'Anonymous'}
+			</div>
+			<div className="cell-center">{ten_grand.Status}</div>
+			<div className="cell-right">{ten_grand.Score}</div>
 		</div>
 	)
 }
