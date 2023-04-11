@@ -12,7 +12,7 @@ export default function SmallDiceRow({ roll }: { roll: string }) {
 		setDice(d)
 	}, [roll])
 	return (
-		<div className="flex flex-wrap">
+		<div className="flex flex-wrap justify-end">
 			{dice.length > 0 &&
 				dice.map((face, i) => <DieSmall key={i} face={face} />)}
 		</div>
