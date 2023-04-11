@@ -6,14 +6,14 @@ export default function ConcentrationScoreRow({
 	concentration: Concentration
 }) {
 	return (
-		<div className="flex flex-wrap px-2 justify-between">
-			<div>
+		<div className="score-row">
+			<div className="cell-left">
 				{concentration.user ? concentration.user.UserName : 'Anonymous'}
 			</div>
-			<div>{concentration.Status}</div>
-			<div>{concentration.Elapsed}</div>
-			<div>{concentration.Moves}</div>
-			<div>{concentration.Matched}</div>
+			<div className="cell-center">{concentration.Status}</div>
+			<div className="cell-center">{concentration.Elapsed}</div>
+			<div className="cell-center">{concentration.Moves}</div>
+			<div className="cell-right">{concentration.Matched}</div>
 		</div>
 	)
 }

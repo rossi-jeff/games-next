@@ -49,12 +49,10 @@ export default function PaginationControl({
   return (
     <div className="flex flex-wrap mx-2 my-2 justify-between">
       <div>
-        <label htmlFor="limit-select">Per Page</label>
-        <select
-          name="limit-select"
-          onChange={changedLimit}
-          className="bg-white text-black ml-2"
-        >
+        <label htmlFor="limit-select" className="font-bold">
+          Per Page
+        </label>
+        <select name="limit-select" onChange={changedLimit} className="ml-2">
           {perPage.map((lim, idx) => (
             <option key={idx} selected={lim == limit}>
               {lim}
@@ -65,7 +63,9 @@ export default function PaginationControl({
       <div className="flex flex-wrap justify-end">
         {pages.map((page) => {
           return page == current ? (
-            <div className="font-bold ml-2">{page}</div>
+            <div className="font-bold ml-2 px-2 py-1 bg-slate-200 rounded">
+              {page}
+            </div>
           ) : (
             <button className="ml-2" onClick={() => changedPage(page)}>
               {page}

@@ -2,14 +2,18 @@ import { HangMan } from '../../../types/hang-man.type'
 
 export default function HangManScoreRow({ hang_man }: { hang_man: HangMan }) {
 	return (
-		<div className="flex flex-wrap px-2 justify-between">
-			<div>{hang_man.id}</div>
-			<div>{hang_man.user ? hang_man.user.UserName : 'Anonymous'}</div>
-			<div>{hang_man.Status}</div>
-			<div>{hang_man.Score}</div>
-			<div>{hang_man.Correct}</div>
-			<div>{hang_man.Wrong}</div>
-			<div>{hang_man.word ? hang_man.word.Word : 'N/A'}</div>
+		<div className="score-row">
+			<div className="cell-left">{hang_man.id}</div>
+			<div className="cell-center">
+				{hang_man.user ? hang_man.user.UserName : 'Anonymous'}
+			</div>
+			<div className="cell-center">{hang_man.Status}</div>
+			<div className="cell-center">{hang_man.Score}</div>
+			<div className="cell-center">{hang_man.Correct}</div>
+			<div className="cell-center">{hang_man.Wrong}</div>
+			<div className="cell-right">
+				{hang_man.word ? hang_man.word.Word : 'N/A'}
+			</div>
 		</div>
 	)
 }
