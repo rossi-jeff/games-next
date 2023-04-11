@@ -30,3 +30,15 @@ h1 {
 h2 {
 	@apply font-bold text-xl mb-2;
 }
+.rounded-box {
+	@apply border border-black rounded p-2 mb-2;
+}
+.dice-container-box {
+	@apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-black rounded p-2 mx-1 my-1;
+}
+.dice-container-box div {
+	@apply cursor-move;
+}
+.over {
+	@apply border-red-500;
+}

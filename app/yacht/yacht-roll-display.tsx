@@ -47,12 +47,18 @@ export default function YachtRollDisplay({
 	}
 
 	return (
-		<div className="mx-2 border border-black rounded p-2 mb-2">
+		<div className="rounded-box">
 			<h2>{heading}</h2>
 			<div className="flex flex-wrap">
 				{dice.map((d, i) => (
 					<div key={i} className="p-2">
-						<DieLarge face={d} index={i} heading={heading} draggable={false} />
+						<DieLarge
+							face={d}
+							index={i}
+							heading={heading}
+							draggable={false}
+							dragStart={() => {}}
+						/>
 						<div className="text-center m-0">
 							<input
 								type="checkbox"

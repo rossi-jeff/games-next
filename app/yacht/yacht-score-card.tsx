@@ -10,7 +10,7 @@ export default function YachtScoreCard({
 	turns: YachtTurn[]
 }) {
 	return (
-		<div className="border border-black rounded p-2 mb-2">
+		<div className="rounded-box">
 			{turns.map((turn) => (
 				<div key={turn.id} className="score-row py-1">
 					<div className="cell-left">{turn.Category}</div>

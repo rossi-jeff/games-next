@@ -24,7 +24,7 @@ export default function YachtScoreOptionsList({
 	}
 
 	return (
-		<div className="mx-2 border border-black rounded p-2 mb-2">
+		<div className="rounded-box">
 			{options.map((option, index) => (
 				<div key={index} className="flex flex-wrap mx-2">
 					<div className="mr-2">
