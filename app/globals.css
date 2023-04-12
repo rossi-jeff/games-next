@@ -136,3 +136,21 @@ option.Yellow,
 select.Yellow {
 	@apply bg-yellow-300 border-yellow-900;
 }
+.sea-battle-placement-grid {
+	@apply mx-2 border border-slate-500 p-0 max-w-fit mb-4 my-2;
+}
+.grid-row {
+	@apply flex flex-wrap;
+}
+.grid-header-cell {
+	@apply w-12 h-12 p-0 m-0 bg-slate-300 font-bold text-center pt-3 border border-dotted border-slate-400;
+}
+.grid-cell {
+	@apply w-12 h-12 p-0 m-0 border border-dotted border-slate-400;
+}
+.highlighted {
+	@apply bg-yellow-100;
+}
+.occupied {
+	@apply bg-slate-100;
+}
