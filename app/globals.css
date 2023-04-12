@@ -4,41 +4,53 @@
 
 button,
 select {
-	@apply border border-black px-2 py-1 rounded;
+  @apply border border-black px-2 py-1 rounded;
 }
 button:hover {
-	@apply bg-slate-200;
+  @apply bg-slate-200;
 }
 .score-row {
-	@apply border-b border-dotted border-slate-400 flex flex-wrap px-2 justify-between;
+  @apply border-b border-dotted border-slate-400 flex flex-wrap px-2 justify-between;
 }
 .cell-left {
-	@apply w-24 text-left;
+  @apply w-24 text-left;
 }
 .cell-center {
-	@apply w-20 text-center;
+  @apply w-20 text-center;
 }
 .cell-center-wide {
-	@apply w-36 text-center;
+  @apply w-36 text-center;
 }
 .cell-right {
-	@apply w-20 text-right;
+  @apply w-20 text-right;
 }
 h1 {
-	@apply font-bold text-2xl mb-2;
+  @apply font-bold text-2xl mb-2;
 }
 h2 {
-	@apply font-bold text-xl mb-2;
+  @apply font-bold text-xl mb-2;
 }
 .rounded-box {
-	@apply border border-black rounded p-2 mb-2;
+  @apply border border-black rounded p-2 mb-2;
 }
 .dice-container-box {
-	@apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-black rounded p-2 mx-1 my-1;
+  @apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-black rounded p-2 mx-1 my-1;
 }
 .dice-container-box div {
-	@apply cursor-move;
+  @apply cursor-move;
 }
 .over {
-	@apply border-red-500;
+  @apply border-red-500;
+}
+input.single {
+  @apply w-8 h-8 border border-black rounded mr-2 text-center;
+}
+.guess-word-guess .Green {
+  @apply bg-green-300 border-green-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
+}
+.guess-word-guess .Gray {
+  @apply bg-gray-200 border-gray-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
+}
+.guess-word-guess .Brown {
+  @apply bg-amber-700 border-amber-900 text-white w-8 h-8 border rounded mr-2 text-center pt-1;
 }
