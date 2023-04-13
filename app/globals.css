@@ -169,3 +169,48 @@ select.Yellow {
 .Sunk span {
 	@apply w-8 h-8 rounded-full bg-red-300 inline-block mt-2;
 }
+.hang-man-drawing {
+	@apply rounded-box w-72 h-72 relative;
+}
+#gallows-top {
+	@apply h-6 bg-amber-800 rounded absolute top-2 left-4 w-40;
+}
+#gallows-left {
+	@apply w-6 h-64 bg-amber-800 rounded absolute top-2 left-4;
+}
+#gallows-bottom {
+	@apply h-6 w-64 bg-amber-800 rounded absolute top-64 left-4;
+}
+#rope {
+	@apply w-2 h-4 bg-amber-700 absolute top-8 left-40;
+}
+#head {
+	@apply w-10 h-10 bg-black rounded-full absolute top-12 left-36 invisible;
+}
+#body {
+	@apply w-16 h-20 bg-black rounded absolute top-[5.5rem] left-[8.25rem] invisible;
+}
+#left-arm {
+	@apply h-4 w-12 bg-black rounded absolute top-[5.5rem] left-[5.5rem] invisible;
+}
+#right-arm {
+	@apply h-4 w-12 bg-black rounded absolute top-[5.5rem] left-[12.1rem] invisible;
+}
+#left-leg {
+	@apply w-5 h-16 bg-black rounded absolute top-[10.3rem] left-[8.2rem] invisible;
+}
+#right-leg {
+	@apply w-5 h-16 bg-black rounded absolute top-[10.3rem] left-44 invisible;
+}
+.visible {
+	visibility: visible !important;
+}
+button.letter {
+	@apply mr-2;
+}
+button.correct {
+	@apply text-white bg-green-600;
+}
+button.wrong {
+	@apply text-white bg-red-600;
+}
