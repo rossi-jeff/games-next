@@ -1,4 +1,4 @@
 export enum Navy {
-	Opponent = 'Opponent',
-	Player = 'Player'
+  Player = "Player",
+  Opponent = "Opponent",
 }

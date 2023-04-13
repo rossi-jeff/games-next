@@ -136,3 +136,36 @@ option.Yellow,
 select.Yellow {
 	@apply bg-yellow-300 border-yellow-900;
 }
+.sea-battle-placement-grid,
+.sea-battle-player-grid,
+.sea-battle-opponent-grid {
+	@apply mx-2 border border-slate-500 p-0 max-w-fit mb-4 my-2;
+}
+.grid-row {
+	@apply flex flex-wrap;
+}
+.grid-header-cell {
+	@apply w-12 h-12 p-0 m-0 bg-slate-300 font-bold text-center pt-3 border border-dotted border-slate-400;
+}
+.grid-cell {
+	@apply w-12 h-12 p-0 m-0 border border-dotted border-slate-400 text-center;
+}
+.highlighted {
+	@apply bg-yellow-100;
+}
+.occupied {
+	@apply bg-slate-100;
+}
+.sea-battle-ship-display {
+	@apply border border-black rounded p-2 max-w-fit mr-2 mb-2;
+}
+.ship-icon {
+	@apply flex flex-wrap justify-center;
+}
+.Miss span {
+	@apply w-8 h-8 rounded-full bg-blue-300 inline-block mt-2;
+}
+.Hit span,
+.Sunk span {
+	@apply w-8 h-8 rounded-full bg-red-300 inline-block mt-2;
+}

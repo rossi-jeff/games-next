@@ -23,3 +23,5 @@ export const ShipTypeValue: { [key: string]: ShipType } = {
 }
 
 export const ShipDirections = ['right', 'down', 'left', 'up']
+
+export const ShipTypeArray = Object.values(ShipType)
