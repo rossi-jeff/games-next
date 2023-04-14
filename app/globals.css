@@ -4,72 +4,72 @@
 
 button,
 select {
-	@apply border border-black px-2 py-1 rounded;
+  @apply border border-black px-2 py-1 rounded;
 }
 button:hover {
-	@apply bg-slate-200;
+  @apply bg-slate-200;
 }
 .score-row {
-	@apply border-b border-dotted border-slate-400 flex flex-wrap px-2 justify-between;
+  @apply border-b border-dotted border-slate-400 flex flex-wrap px-2 justify-between;
 }
 .cell-left {
-	@apply w-24 text-left;
+  @apply w-24 text-left;
 }
 .cell-center {
-	@apply w-20 text-center;
+  @apply w-20 text-center;
 }
 .cell-center-wide {
-	@apply w-36 text-center;
+  @apply w-36 text-center;
 }
 .cell-right {
-	@apply w-20 text-right;
+  @apply w-20 text-right;
 }
 h1 {
-	@apply font-bold text-2xl mb-2;
+  @apply font-bold text-2xl mb-2;
 }
 h2 {
-	@apply font-bold text-xl mb-2;
+  @apply font-bold text-xl mb-2;
 }
 .rounded-box {
-	@apply border border-black rounded p-2 mb-2;
+  @apply border border-black rounded p-2 mb-2;
 }
 .dice-container-box {
-	@apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-black rounded p-2 mx-1 my-1;
+  @apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-black rounded p-2 mx-1 my-1;
 }
 .dice-container-box div {
-	@apply cursor-move;
+  @apply cursor-move;
 }
 .over {
-	@apply border-red-500;
+  @apply border-red-500;
 }
 input.single {
-	@apply w-8 h-8 border border-black rounded mr-2 text-center;
+  @apply w-8 h-8 border border-black rounded mr-2 text-center;
 }
 .guess-word-guess .Green {
-	@apply bg-green-300 border-green-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
+  @apply bg-green-300 border-green-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
 }
 .guess-word-guess .Gray {
-	@apply bg-gray-200 border-gray-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
+  @apply bg-gray-200 border-gray-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
 }
 .guess-word-guess .Brown {
-	@apply bg-amber-700 border-amber-900 text-white w-8 h-8 border rounded mr-2 text-center pt-1;
+  @apply bg-amber-700 border-amber-900 text-white w-8 h-8 border rounded mr-2 text-center pt-1;
 }
 .code-breaker-guess-colors,
 .code-breaker-codes {
-	@apply flex flex-wrap mr-4 py-1;
+  @apply flex flex-wrap mr-4 py-1;
 }
 .code-breaker-guess-colors div,
 .code-breaker-codes div {
-	@apply w-8 h-8 border rounded-full mr-4;
+  @apply w-8 h-8 border rounded-full mr-4;
 }
 .code-breaker-guess-keys {
-	@apply flex flex-wrap pt-1;
+  @apply flex flex-wrap pt-1;
 }
 .code-breaker-guess-keys div {
-	@apply h-4 w-4 border rounded-full mr-2;
+  @apply h-4 w-4 border rounded-full mr-2;
 }
 #color-checks div {
-	@apply border rounded px-2 py-1 mr-2;
+  @apply border rounded px-2 py-1 mr-2;
 }
 #color-checks div.Black,
 .code-breaker-guess-colors div.Black,
@@ -77,49 +77,49 @@ input.single {
 .code-breaker-codes div.Black,
 option.Black,
 select.Black {
-	@apply bg-black border-black text-white;
+  @apply bg-black border-black text-white;
 }
 #color-checks div.Blue,
 .code-breaker-guess-colors div.Blue,
 .code-breaker-codes div.Blue,
 option.Blue,
 select.Blue {
-	@apply bg-blue-700 border-blue-900 text-white;
+  @apply bg-blue-700 border-blue-900 text-white;
 }
 #color-checks div.Brown,
 .code-breaker-guess-colors div.Brown,
 .code-breaker-codes div.Brown,
 option.Brown,
 select.Brown {
-	@apply bg-amber-800 border-amber-900 text-white;
+  @apply bg-amber-800 border-amber-900 text-white;
 }
 #color-checks div.Green,
 .code-breaker-guess-colors div.Green,
 .code-breaker-codes div.Green,
 option.Green,
 select.Green {
-	@apply bg-green-500 border-green-900;
+  @apply bg-green-500 border-green-900;
 }
 #color-checks div.Orange,
 .code-breaker-guess-colors div.Orange,
 .code-breaker-codes div.Orange,
 option.Orange,
 select.Orange {
-	@apply bg-orange-400 border-orange-900;
+  @apply bg-orange-400 border-orange-900;
 }
 #color-checks div.Purple,
 .code-breaker-guess-colors div.Purple,
 .code-breaker-codes div.Purpla,
 option.Purple,
 select.Purple {
-	@apply bg-purple-600 border-purple-900;
+  @apply bg-purple-600 border-purple-900;
 }
 #color-checks div.Red,
 .code-breaker-guess-colors div.Red,
 .code-breaker-codes div.Red,
 option.Red,
 select.Red {
-	@apply bg-red-600 border-red-900;
+  @apply bg-red-600 border-red-900;
 }
 #color-checks div.White,
 .code-breaker-guess-colors div.White,
@@ -127,45 +127,93 @@ select.Red {
 .code-breaker-codes div.White,
 option.White,
 select.White {
-	@apply bg-white border-black;
+  @apply bg-white border-black;
 }
 #color-checks div.Yellow,
 .code-breaker-guess-colors div.Yellow,
 .code-breaker-codes div.Yellow,
 option.Yellow,
 select.Yellow {
-	@apply bg-yellow-300 border-yellow-900;
+  @apply bg-yellow-300 border-yellow-900;
 }
 .sea-battle-placement-grid,
 .sea-battle-player-grid,
 .sea-battle-opponent-grid {
-	@apply mx-2 border border-slate-500 p-0 max-w-fit mb-4 my-2;
+  @apply mx-2 border border-slate-500 p-0 max-w-fit mb-4 my-2;
 }
 .grid-row {
-	@apply flex flex-wrap;
+  @apply flex flex-wrap;
 }
 .grid-header-cell {
-	@apply w-12 h-12 p-0 m-0 bg-slate-300 font-bold text-center pt-3 border border-dotted border-slate-400;
+  @apply w-12 h-12 p-0 m-0 bg-slate-300 font-bold text-center pt-3 border border-dotted border-slate-400;
 }
 .grid-cell {
-	@apply w-12 h-12 p-0 m-0 border border-dotted border-slate-400 text-center;
+  @apply w-12 h-12 p-0 m-0 border border-dotted border-slate-400 text-center;
 }
 .highlighted {
-	@apply bg-yellow-100;
+  @apply bg-yellow-100;
 }
 .occupied {
-	@apply bg-slate-100;
+  @apply bg-slate-100;
 }
 .sea-battle-ship-display {
-	@apply border border-black rounded p-2 max-w-fit mr-2 mb-2;
+  @apply border border-black rounded p-2 max-w-fit mr-2 mb-2;
 }
 .ship-icon {
-	@apply flex flex-wrap justify-center;
+  @apply flex flex-wrap justify-center;
 }
 .Miss span {
-	@apply w-8 h-8 rounded-full bg-blue-300 inline-block mt-2;
+  @apply w-8 h-8 rounded-full bg-blue-300 inline-block mt-2;
 }
 .Hit span,
 .Sunk span {
-	@apply w-8 h-8 rounded-full bg-red-300 inline-block mt-2;
+  @apply w-8 h-8 rounded-full bg-red-300 inline-block mt-2;
+}
+.hang-man-drawing {
+  @apply rounded-box w-72 h-72 relative;
+}
+#gallows-top {
+  @apply h-6 bg-amber-800 rounded absolute top-2 left-4 w-40;
+}
+#gallows-left {
+  @apply w-6 h-64 bg-amber-800 rounded absolute top-2 left-4;
+}
+#gallows-bottom {
+  @apply h-6 w-64 bg-amber-800 rounded absolute top-64 left-4;
+}
+#rope {
+  @apply w-2 h-4 bg-amber-700 absolute top-8 left-40;
+}
+#head {
+  @apply w-10 h-10 bg-black rounded-full absolute top-12 left-36 invisible;
+}
+#body {
+  @apply w-16 h-20 bg-black rounded absolute top-[5.5rem] left-[8.25rem] invisible;
+}
+#left-arm {
+  @apply h-4 w-12 bg-black rounded absolute top-[5.5rem] left-[5.5rem] invisible;
+}
+#right-arm {
+  @apply h-4 w-12 bg-black rounded absolute top-[5.5rem] left-[12.1rem] invisible;
+}
+#left-leg {
+  @apply w-5 h-16 bg-black rounded absolute top-[10.3rem] left-[8.2rem] invisible;
+}
+#right-leg {
+  @apply w-5 h-16 bg-black rounded absolute top-[10.3rem] left-44 invisible;
+}
+.visible {
+  visibility: visible !important;
+}
+button.letter {
+  @apply mr-2;
+}
+button.correct {
+  @apply text-white bg-green-600;
+}
+button.wrong {
+  @apply text-white bg-red-600;
+}
+.hang-man-letter {
+  @apply w-8 h-8 border-b border-black mr-2 text-current uppercase;
 }
