@@ -11,7 +11,6 @@ import { GameStatus } from '../../enum/game-status.enum'
 import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
 import { FreeCell } from '../../types/free-cell.type'
-import { diceDoubleThreeKind } from '../../../games-nest/src/ten-grand/ten-grand-functions'
 
 export default function FreeCellGame() {
 	let deck: Deck | undefined
@@ -33,6 +32,8 @@ export default function FreeCellGame() {
 	const [tableau, setTableau] = useState<CardContainerType>({})
 	const [freeCell, setFreeCell] = useState<FreeCell>({})
 	const [moves, setMoves] = useState(0)
+	const [canAutoComplete, setCanAutoComplete] = useState(false)
+	const timeout = useRef<ReturnType<typeof setTimeout> | undefined>()
 
 	// begin timer code
 	const [elapsed, setElapsed] = useState(0)
@@ -56,7 +57,6 @@ export default function FreeCellGame() {
 				interval.current = undefined
 			}
 			paused.current = Date.now()
-			console.log('pause', elapsed)
 		},
 		resume() {
 			if (interval.current) {
@@ -68,7 +68,6 @@ export default function FreeCellGame() {
 				initial.current = initial.current + offset
 			}
 			interval.current = setInterval(() => clock.tick(), 1000)
-			console.log('resume', elapsed)
 		},
 		tick() {
 			setElapsed(Math.round((Date.now() - initial.current) / 1000))
@@ -102,6 +101,7 @@ export default function FreeCellGame() {
 		Tableau = adjustDraggableTableau(Tableau)
 		setTableau(Tableau)
 		setMoves(0)
+		setCanAutoComplete(false)
 		clock.start()
 		createGame()
 	}
@@ -140,6 +140,15 @@ export default function FreeCellGame() {
 
 	const quit = () => {
 		clock.pause()
+		let Tableau: CardContainerType = {}
+		let Free: CardContainerType = {}
+		let Aces: CardContainerType = {}
+		for (const id of tableauID) Tableau[id] = []
+		for (const id of freeID) Free[id] = []
+		for (const id of aceID) Aces[id] = []
+		setAces(Aces)
+		setFree(Free)
+		setTableau(Tableau)
 		updateGame(GameStatus.Lost)
 	}
 
@@ -316,18 +325,119 @@ export default function FreeCellGame() {
 		setFree(Free)
 		setAces(Aces)
 		setMoves(moves + 1)
-		checkProgress(Aces)
+		checkProgress(Aces, Tableau)
 	}
 
-	const checkProgress = (Aces: CardContainerType) => {
+	const checkProgress = (
+		Aces: CardContainerType,
+		Tableau: CardContainerType
+	) => {
 		let aceCount = 0
+		let allDescending = true
+		let current: Card | undefined, previous: Card | undefined
+
 		for (const id of aceID) {
 			if (Aces[id]) aceCount += Aces[id].length
 		}
+		for (const id of tableauID) {
+			if (Tableau[id] && Tableau[id].length && deck != undefined) {
+				previous = undefined
+				for (let i = Tableau[id].length - 1; i >= 0; i--) {
+					current = Tableau[id][i]
+					if (
+						previous &&
+						(deck.color(previous) == deck.color(current) ||
+							deck.faces.indexOf(current.face) !=
+								deck.faces.indexOf(previous.face) + 1)
+					)
+						allDescending = false
+					previous = current
+				}
+			}
+		}
 		if (aceCount == 52) {
 			clock.pause()
+			setCanAutoComplete(false)
 			updateGame(GameStatus.Won)
+		} else setCanAutoComplete(allDescending)
+	}
+
+	const autoComplete = () => {
+		deck = new Deck()
+		let lowestCard: Card | undefined
+		let lastCard: Card | undefined
+		let Tableau: CardContainerType = { ...tableau }
+		let Free: CardContainerType = { ...free }
+		let Aces: CardContainerType = { ...aces }
+		let fromStack: string | undefined
+		let toStack: string | undefined
+		let fromType: string | undefined
+		for (const id of freeID) {
+			if (Free[id] && Free[id].length) {
+				lastCard = Free[id][Free[id].length - 1]
+				if (
+					lastCard &&
+					(!lowestCard ||
+						deck.faces.indexOf(lastCard.face) <
+							deck.faces.indexOf(lowestCard.face))
+				) {
+					lowestCard = lastCard
+					fromStack = id
+					fromType = 'free'
+				}
+			}
 		}
+		for (const id of tableauID) {
+			if (Tableau[id] && Tableau[id].length) {
+				lastCard = Tableau[id][Tableau[id].length - 1]
+				if (
+					lastCard &&
+					(!lowestCard ||
+						deck.faces.indexOf(lastCard.face) <
+							deck.faces.indexOf(lowestCard.face))
+				) {
+					lowestCard = lastCard
+					fromStack = id
+					fromType = 'tableau'
+				}
+			}
+		}
+		if (lowestCard && fromStack && fromType) {
+			for (const id of aceID) {
+				if (Aces[id]) {
+					if (Aces[id].length) {
+						lastCard = Aces[id][Aces[id].length - 1]
+						if (
+							lastCard &&
+							lastCard.suit == lowestCard.suit &&
+							deck.faces.indexOf(lowestCard.face) &&
+							deck.faces.indexOf(lastCard.face) + 1
+						)
+							toStack = id
+					} else if (lowestCard.face == 'ace') {
+						toStack = id
+					}
+				}
+			}
+			if (toStack) {
+				switch (fromType) {
+					case 'free':
+						card = Free[fromStack].pop()
+						break
+					case 'tableau':
+						card = Tableau[fromStack].pop()
+						break
+				}
+				if (card) {
+					Aces[toStack].push(card)
+					setAces(Aces)
+					setFree(Free)
+					setTableau(Tableau)
+					setMoves(moves + 1)
+					timeout.current = setTimeout(() => autoComplete(), 250)
+				}
+			}
+		} else checkProgress(Aces, Tableau)
 	}
 
 	const maxFreeSpace = () => {
@@ -375,6 +485,11 @@ export default function FreeCellGame() {
 					)}
 					{freeCell.Status == GameStatus.Playing && (
 						<button onClick={quit}>Quit</button>
+					)}
+					{canAutoComplete && (
+						<button className="ml-2" onClick={autoComplete}>
+							Auto Complete
+						</button>
 					)}
 				</div>
 				<div>
