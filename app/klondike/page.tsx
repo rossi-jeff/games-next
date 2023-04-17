@@ -75,7 +75,6 @@ export default function KlondikeGame() {
   // end timer code
 
   const deal = () => {
-    console.log("deal");
     deck = new Deck();
     deck.preload();
     deck.shuffle();
