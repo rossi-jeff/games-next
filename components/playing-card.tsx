@@ -1,5 +1,5 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Card } from '../lib/card.class'
 import Image from 'next/image'
 
@@ -19,10 +19,14 @@ export default function PlayingCard({
 	dragStart: Function
 }) {
 	const id = `${from}_${level}_${card.id}_${index}`
+	const timeout = useRef<ReturnType<typeof setTimeout> | undefined>()
 
 	const onClick = () => {
 		if (!card.clickable) return false
-		click({ id })
+		if (timeout.current) clearTimeout(timeout.current)
+		timeout.current = setTimeout(() => {
+			click({ id })
+		}, 125)
 	}
 
 	const onDragStart = (ev: any) => {
@@ -48,8 +52,9 @@ export default function PlayingCard({
 			card.draggable
 				? el.classList.add('draggable')
 				: el.classList.remove('draggable')
+			el.style.visibility = card.visible == true ? 'visible' : 'hidden'
 		}
-	}, [card, id])
+	}, [card.clickable, card.draggable, card.visible, id])
 
 	return (
 		<div
