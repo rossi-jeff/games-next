@@ -136,7 +136,7 @@ select.Orange {
 }
 #color-checks div.Purple,
 .code-breaker-guess-colors div.Purple,
-.code-breaker-codes div.Purpla,
+.code-breaker-codes div.Purple,
 option.Purple,
 select.Purple {
 	@apply bg-purple-600 border-purple-900;

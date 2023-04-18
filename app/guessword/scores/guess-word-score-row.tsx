@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { GuessWord } from '../../../types/guess-word.type'
 import React from 'react'
 
@@ -8,7 +9,9 @@ export default function GuessWordScoreRow({
 }) {
 	return (
 		<div className="score-row">
-			<div className="cell-left">{guess_word.id}</div>
+			<div className="cell-left">
+				<Link href={'/guessword/scores/' + guess_word.id}>View</Link>
+			</div>
 			<div className="cell-center">
 				{guess_word.user ? guess_word.user.UserName : 'Anonymous'}
 			</div>
