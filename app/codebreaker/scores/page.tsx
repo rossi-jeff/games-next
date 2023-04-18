@@ -34,7 +34,7 @@ export default function CodeBreakerScores({
 	}
 
 	return (
-		<div className="code-breaker-scores">
+		<div id="code-breaker-scores" className="m-2">
 			<h1>Code Breaker Scores</h1>
 			<div>
 				{Items.map((code_breaker: CodeBreaker) => (

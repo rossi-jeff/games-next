@@ -34,7 +34,7 @@ export default function KlondikeScores({
 	}
 
 	return (
-		<div className="klondike-scores">
+		<div id="klondike-scores" className="m-2">
 			<h1>Klondike Scores</h1>
 			<div>
 				{Items.map((klondike: Klondike) => (

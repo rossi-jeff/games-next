@@ -34,7 +34,7 @@ export default function HangManScores({
 	}
 
 	return (
-		<div className="hang-man-scores">
+		<div id="hang-man-scores" className='m-2'>
 			<h1>Hang man Scores</h1>
 			<div>
 				{Items.map((hang_man: HangMan) => (

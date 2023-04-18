@@ -34,7 +34,7 @@ export default function SeaBattleScores({
 	}
 
 	return (
-		<div className="sea-battle-scores">
+		<div id="sea-battle-scores" className='m-2'>
 			<h1>Sea Battle Scores</h1>
 			<div>
 				{Items.map((sea_battle: SeaBattle) => (

@@ -34,7 +34,7 @@ export default function TenGrandScores({
 	}
 
 	return (
-		<div className="ten-grand-scores">
+		<div id="ten-grand-scores" className="m-2">
 			<h1>Ten Grand Scores</h1>
 			<div>
 				{Items.map((ten_grand: TenGrand) => (

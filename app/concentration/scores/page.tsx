@@ -34,7 +34,7 @@ export default function ConcentrationScores({
 	}
 
 	return (
-		<div className="concentration-scores">
+		<div id="concentration-scores" className="m-2">
 			<h1>Concentration Scores</h1>
 			<div>
 				{Items.map((concentration: Concentration) => (

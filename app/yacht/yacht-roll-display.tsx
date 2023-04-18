@@ -47,7 +47,7 @@ export default function YachtRollDisplay({
 	}
 
 	return (
-		<div className="rounded-box">
+		<div className="nested-rounded-box">
 			<h2>{heading}</h2>
 			<div className="flex flex-wrap">
 				{dice.map((d, i) => (

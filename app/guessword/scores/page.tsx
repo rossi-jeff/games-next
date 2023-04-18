@@ -34,7 +34,7 @@ export default function GuessWordScores({
 	}
 
 	return (
-		<div className="guess-word-scores">
+		<div id="guess-word-scores" className="m-2">
 			<h1>Guess Word Scores</h1>
 			<div>
 				{Items.map((guess_word: GuessWord) => (

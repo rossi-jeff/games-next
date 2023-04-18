@@ -34,7 +34,7 @@ export default function FreeCellScores({
 	}
 
 	return (
-		<div className="free-cell-scores">
+		<div id="free-cell-scores" className='m-2'>
 			<h1>Free Cell Scores</h1>
 			<div>
 				{Items.map((free_cell: FreeCell) => (

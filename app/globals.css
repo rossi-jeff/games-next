@@ -2,15 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	@apply m-0 p-0 bg-slate-800 text-white;
+}
+ul {
+	@apply list-disc list-inside mb-2;
+}
+li {
+	@apply ml-2;
+}
+.rounded-box {
+	@apply border border-white rounded p-2 mb-2 bg-slate-500;
+}
+.nested-rounded-box {
+	@apply border border-white rounded p-2 mb-2 bg-slate-600;
+}
+#nav-bar {
+	@apply rounded-box flex flex-wrap justify-between mx-2 mt-2 px-2 py-1;
+}
+#nav-bar a {
+	@apply py-1 px-2 no-underline text-white font-bold;
+}
+#nav-bar a.active {
+	@apply py-1 px-2 bg-slate-600 text-white font-bold underline rounded;
+}
+#nav-bar a:hover {
+	@apply underline text-yellow-300;
+}
+#games-home a {
+	@apply font-bold no-underline text-yellow-200;
+}
+#games-home a:hover {
+	@apply font-bold underline text-yellow-300;
+}
 button,
 select {
-	@apply border border-black px-2 py-1 rounded;
+	@apply border border-white px-2 py-1 rounded bg-slate-400 text-black;
 }
 button:hover {
 	@apply bg-slate-200;
 }
 .score-row {
-	@apply border-b border-dotted border-slate-400 flex flex-wrap px-2 justify-between;
+	@apply border-b border-dotted border-slate-200 flex flex-wrap px-2 justify-between;
 }
 .cell-left {
 	@apply w-24 text-left;
@@ -30,23 +63,20 @@ h1 {
 h2 {
 	@apply font-bold text-xl mb-2;
 }
-.rounded-box {
-	@apply border border-black rounded p-2 mb-2;
-}
 .dice-container-box {
-	@apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-black rounded p-2 mx-1 my-1;
+	@apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-white rounded p-2 mx-1 my-2;
 }
 .dice-container-box div {
 	@apply cursor-move;
 }
 input.single {
-	@apply w-8 h-8 border border-black rounded mr-2 text-center;
+	@apply w-8 h-8 border border-black rounded mr-2 text-center text-black;
 }
 .guess-word-guess .Green {
 	@apply bg-green-300 border-green-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
 }
 .guess-word-guess .Gray {
-	@apply bg-gray-200 border-gray-900 text-black w-8 h-8 border rounded mr-2 text-center pt-1;
+	@apply bg-gray-600 border-gray-900 text-white w-8 h-8 border rounded mr-2 text-center pt-1;
 }
 .guess-word-guess .Brown {
 	@apply bg-amber-700 border-amber-900 text-white w-8 h-8 border rounded mr-2 text-center pt-1;
@@ -124,37 +154,37 @@ select.Red {
 .code-breaker-codes div.White,
 option.White,
 select.White {
-	@apply bg-white border-black;
+	@apply bg-white border-black text-black;
 }
 #color-checks div.Yellow,
 .code-breaker-guess-colors div.Yellow,
 .code-breaker-codes div.Yellow,
 option.Yellow,
 select.Yellow {
-	@apply bg-yellow-300 border-yellow-900;
+	@apply bg-yellow-300 border-yellow-900 text-black;
 }
 .sea-battle-placement-grid,
 .sea-battle-player-grid,
 .sea-battle-opponent-grid {
-	@apply mx-2 border border-slate-500 p-0 max-w-fit mb-4 my-2;
+	@apply mx-2 border border-slate-700 p-0 max-w-fit mb-4 my-2 bg-slate-200;
 }
 .grid-row {
 	@apply flex flex-wrap;
 }
 .grid-header-cell {
-	@apply w-12 h-12 p-0 m-0 bg-slate-300 font-bold text-center pt-3 border border-dotted border-slate-400;
+	@apply w-12 h-12 p-0 m-0 font-bold text-center pt-3 border border-dotted border-slate-400 bg-slate-700;
 }
 .grid-cell {
-	@apply w-12 h-12 p-0 m-0 border border-dotted border-slate-400 text-center;
+	@apply w-12 h-12 p-0 m-0 border border-dotted border-slate-500 text-center;
 }
 .highlighted {
-	@apply bg-yellow-100;
+	@apply bg-yellow-200;
 }
 .occupied {
-	@apply bg-slate-100;
+	@apply bg-slate-400;
 }
 .sea-battle-ship-display {
-	@apply border border-black rounded p-2 max-w-fit mr-2 mb-2;
+	@apply border border-white bg-slate-600 rounded p-2 max-w-fit mr-2 mb-2;
 }
 .ship-icon {
 	@apply flex flex-wrap justify-center;
@@ -164,7 +194,7 @@ select.Yellow {
 }
 .Hit span,
 .Sunk span {
-	@apply w-8 h-8 rounded-full bg-red-300 inline-block mt-2;
+	@apply w-8 h-8 rounded-full bg-red-400 inline-block mt-2;
 }
 .hang-man-drawing {
 	@apply rounded-box w-72 h-72 relative;
@@ -215,7 +245,7 @@ button.wrong {
 	@apply w-8 h-8 border-b border-black mr-2 text-current uppercase;
 }
 .card-container {
-	@apply border border-dashed rounded border-black w-28 h-[9.5rem] p-0 relative;
+	@apply border border-dashed rounded border-white w-28 h-[9.5rem] p-0 relative bg-slate-700;
 }
 .playing-card {
 	@apply w-24 h-32 p-0 absolute left-2;
