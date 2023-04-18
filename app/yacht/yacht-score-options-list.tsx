@@ -24,9 +24,12 @@ export default function YachtScoreOptionsList({
 	}
 
 	return (
-		<div className="rounded-box">
+		<div className="nested-rounded-box">
 			{options.map((option, index) => (
-				<div key={index} className="flex flex-wrap mx-2">
+				<div
+					key={index}
+					className="flex flex-wrap mx-2 border-b border-dotted border-slate-200"
+				>
 					<div className="mr-2">
 						<input
 							type="radio"
@@ -41,7 +44,9 @@ export default function YachtScoreOptionsList({
 				</div>
 			))}
 			<div>
-				<button onClick={scoreClicked}>Score Option</button>
+				<button onClick={scoreClicked} className="mt-2">
+					Score Option
+				</button>
 			</div>
 		</div>
 	)

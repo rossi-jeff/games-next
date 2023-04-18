@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { TenGrand } from '../../../types/ten-grand.type'
 
 export default function TenGrandScoreRow({
@@ -7,7 +8,9 @@ export default function TenGrandScoreRow({
 }) {
 	return (
 		<div className="score-row">
-			<div className="cell-left">{ten_grand.id}</div>
+			<div className="cell-left">
+				<Link href={'/tengrand/scores/' + ten_grand.id}>View</Link>
+			</div>
 			<div className="cell-center">
 				{ten_grand.user ? ten_grand.user.UserName : 'Anonymous'}
 			</div>

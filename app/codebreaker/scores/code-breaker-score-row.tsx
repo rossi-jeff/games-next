@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CodeBreaker } from '../../../types/code-breaker.type'
 
 export default function CodeBreakerScoreRow({
@@ -7,7 +8,9 @@ export default function CodeBreakerScoreRow({
 }) {
 	return (
 		<div className="score-row">
-			<div className="cell-left">{code_breaker.id}</div>
+			<div className="cell-left">
+				<Link href={'/codebreaker/scores/' + code_breaker.id}>View</Link>
+			</div>
 			<div className="cell-center">
 				{code_breaker.user ? code_breaker.user.UserName : 'Anonymous'}
 			</div>

@@ -34,8 +34,13 @@ export default function YachtScores({
   };
 
   return (
-    <div className="yacht-scores">
+    <div id="yacht-scores" className="m-2">
       <h1>Yacht Scores</h1>
+      <div className="score-header">
+        <div className="cell-left"></div>
+        <div className="cell-center">User</div>
+        <div className="cell-right">Score</div>
+      </div>
       {Items.map((yacht: Yacht) => (
         <YachtScoreRow key={yacht.id} yacht={yacht} />
       ))}

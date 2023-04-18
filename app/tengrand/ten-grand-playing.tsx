@@ -235,7 +235,7 @@ export default function TenGrandPlaying({
 				</div>
 			)}
 			{turn && turn.id != undefined && (
-				<div className="rounded-box">
+				<div className="nested-rounded-box">
 					<TenGrandTurnDisplay turn={turn} />
 				</div>
 			)}

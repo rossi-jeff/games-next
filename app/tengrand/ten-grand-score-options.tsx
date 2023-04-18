@@ -30,7 +30,7 @@ export default function TenGrandScoreOptions({
 		scoreOptions({ selected })
 	}
 	return (
-		<div className="rounded-box">
+		<div className="nested-rounded-box">
 			{options.map((option, index) => (
 				<div key={index} className="score-row">
 					<div className="mr-2">
