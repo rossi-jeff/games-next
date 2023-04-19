@@ -8,15 +8,19 @@ import TenGrandPlaying from './ten-grand-playing'
 import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
 import TenGrandScoreCard from './ten-grand-score-card'
+import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
 
 export default function TenGrandGame() {
 	const [tenGrand, setTenGrand] = useState<TenGrand>({})
+
+	const { getItem } = useStorage()
+	const session: SessionData = getItem(sessionKey, 'session')
 
 	const createGame = async () => {
 		try {
 			const result = await fetch(`${apiUrl}/api/ten_grand`, {
 				method: 'POST',
-				headers: buildRequestHeaders(),
+				headers: buildRequestHeaders(session),
 			})
 			if (result.ok) {
 				const game = await result.json()

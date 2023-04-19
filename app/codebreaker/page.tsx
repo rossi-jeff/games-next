@@ -10,11 +10,15 @@ import { buildRequestHeaders } from '../../lib/build-request-headers'
 import { GameStatus } from '../../enum/game-status.enum'
 import CodeBreakerGuessList from './code-breaker-guess-list'
 import CodeBreakerSolution from './code-breaker-solution'
+import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
 
 export default function CodeBreakerGame() {
 	const [columns, setColumns] = useState<number>(4)
 	const [available, setAvailable] = useState<string[]>([])
 	const [codeBreaker, setCodeBreaker] = useState<CodeBreaker>({})
+
+	const { getItem } = useStorage()
+	const session: SessionData = getItem(sessionKey, 'session')
 
 	const newGame = async (ev: any) => {
 		const { Colors, Columns } = ev
@@ -24,7 +28,7 @@ export default function CodeBreakerGame() {
 			const result = await fetch(`${apiUrl}/api/code_breaker`, {
 				method: 'POST',
 				body: JSON.stringify({ Colors, Columns }),
-				headers: buildRequestHeaders(),
+				headers: buildRequestHeaders(session),
 			})
 			if (result.ok) {
 				const game = await result.json()

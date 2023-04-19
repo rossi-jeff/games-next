@@ -11,6 +11,7 @@ import { formatElapsed } from '@/lib/clock.class'
 import PlayingCard from '@/components/playing-card'
 import { apiUrl } from '@/lib/api-url'
 import { buildRequestHeaders } from '@/lib/build-request-headers'
+import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
 
 export default function KlondikeGame() {
 	let deck: Deck | undefined
@@ -33,6 +34,9 @@ export default function KlondikeGame() {
 	const [canAutoComplete, setCanAutoComplete] = useState(false)
 	const timeout = useRef<ReturnType<typeof setTimeout> | undefined>()
 	const [klondike, setKlondike] = useState<Klondike>({})
+
+	const { getItem } = useStorage()
+	const session: SessionData = getItem(sessionKey, 'session')
 
 	// begin timer code
 	const [elapsed, setElapsed] = useState(0)
@@ -117,7 +121,7 @@ export default function KlondikeGame() {
 		try {
 			const result = await fetch(`${apiUrl}/api/klondike`, {
 				method: 'POST',
-				headers: buildRequestHeaders(),
+				headers: buildRequestHeaders(session),
 			})
 			if (result.ok) {
 				const game = await result.json()

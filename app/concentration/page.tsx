@@ -10,6 +10,7 @@ import { formatElapsed } from '@/lib/clock.class'
 import PlayingCard from '@/components/playing-card'
 import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
+import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
 
 type ClickedCardType = { first: number; second: number }
 
@@ -24,6 +25,9 @@ export default function ConcentrationGame() {
 		first: -1,
 		second: -1,
 	})
+
+	const { getItem } = useStorage()
+	const session: SessionData = getItem(sessionKey, 'session')
 
 	// begin timer code
 	const [elapsed, setElapsed] = useState(0)
@@ -79,7 +83,7 @@ export default function ConcentrationGame() {
 		try {
 			const result = await fetch(`${apiUrl}/api/concentration`, {
 				method: 'POST',
-				headers: buildRequestHeaders(),
+				headers: buildRequestHeaders(session),
 			})
 			if (result.ok) {
 				const game = await result.json()
