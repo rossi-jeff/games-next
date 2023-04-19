@@ -7,15 +7,19 @@ import YachtPlaying from './yacht-playing'
 import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
 import YachtScoreCard from './yacht-score-card'
+import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
 
 export default function YachtGame() {
 	const [yacht, setYacht] = useState<Yacht>({})
+
+	const { getItem } = useStorage()
+	const session: SessionData = getItem(sessionKey, 'session')
 
 	const createGame = async () => {
 		try {
 			const result = await fetch(`${apiUrl}/api/yacht`, {
 				method: 'POST',
-				headers: buildRequestHeaders(),
+				headers: buildRequestHeaders(session),
 			})
 			if (result.ok) {
 				const game = await result.json()

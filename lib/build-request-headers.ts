@@ -1,6 +1,11 @@
-export const buildRequestHeaders = () => {
-	const headers: Headers = new Headers()
-	headers.append('Content-Type', 'application/json')
-	headers.append('Accept', 'application/json')
+import { SessionData } from './session-storage'
+
+export const buildRequestHeaders = (session?: SessionData) => {
+	const headers: { [key: string]: string } = {}
+	headers['Content-Type'] = 'application/json'
+	headers['Accept'] = 'application/json'
+	if (session && session.Token) {
+		headers['Authorization'] = `Bearer ${session.Token}`
+	}
 	return headers
 }

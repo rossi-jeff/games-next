@@ -15,6 +15,7 @@ import { SeaBattleShip } from '@/types/sea-batte-ship.type'
 import { SeaBattleTurn } from '@/types/sea-battle-turn.type'
 import SeaBattlePlayerTurn from './sea-battle-player-turn'
 import SeaBattleOpponentTurn from './sea-battle-opponent-turn'
+import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
 
 export default function SeaBattleGame() {
 	const [seaBattle, setSeaBattle] = useState<SeaBattle>({})
@@ -25,6 +26,9 @@ export default function SeaBattleGame() {
 	const [opponentTurns, setOpponentTurns] = useState<SeaBattleTurn[]>([])
 	const [navy, setNavy] = useState<string>(Navy.Player)
 	const [fired, setFired] = useState<boolean>(false)
+
+	const { getItem } = useStorage()
+	const session: SessionData = getItem(sessionKey, 'session')
 
 	const newGame = async (ev: any) => {
 		const { axis: Axis, ships } = ev
@@ -37,7 +41,7 @@ export default function SeaBattleGame() {
 			const result = await fetch(`${apiUrl}/api/sea_battle`, {
 				method: 'POST',
 				body: JSON.stringify({ Axis }),
-				headers: buildRequestHeaders(),
+				headers: buildRequestHeaders(session),
 			})
 			if (result.ok) {
 				const game = await result.json()

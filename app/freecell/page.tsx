@@ -11,6 +11,7 @@ import { GameStatus } from '../../enum/game-status.enum'
 import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
 import { FreeCell } from '../../types/free-cell.type'
+import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
 
 export default function FreeCellGame() {
 	let deck: Deck | undefined
@@ -34,6 +35,9 @@ export default function FreeCellGame() {
 	const moves = useRef(0)
 	const [canAutoComplete, setCanAutoComplete] = useState(false)
 	const timeout = useRef<ReturnType<typeof setTimeout> | undefined>()
+
+	const { getItem } = useStorage()
+	const session: SessionData = getItem(sessionKey, 'session')
 
 	// begin timer code
 	const [elapsed, setElapsed] = useState(0)
@@ -110,7 +114,7 @@ export default function FreeCellGame() {
 		try {
 			const result = await fetch(`${apiUrl}/api/free_cell`, {
 				method: 'POST',
-				headers: buildRequestHeaders(),
+				headers: buildRequestHeaders(session),
 			})
 			if (result.ok) {
 				const game = await result.json()
