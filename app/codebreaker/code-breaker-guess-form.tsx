@@ -55,7 +55,7 @@ export default function CodeBreakerGuessForm({
 			}
 		}
 		setSelected(s)
-	}, [columns])
+	}, [columns, available])
 
 	return (
 		<div className="rounded-box  flex flex-wrap justify-between">

@@ -34,7 +34,7 @@ export default function PaginationControl({
 		}
 		setPages(pageArray)
 		setCurrent(Math.floor(offset / limit) + 1)
-	}, [])
+	}, [count, limit, offset])
 
 	const changedPage = (page: number) => {
 		setCurrent(page)

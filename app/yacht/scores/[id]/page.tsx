@@ -7,9 +7,25 @@ import useSWR from 'swr'
 import { Yacht } from '../../../../types/yacht.type'
 import YachtScoreCard from '../../yacht-score-card'
 import Link from 'next/link'
+import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
+import { IdArray } from '../../../../types/id-array.type'
 
-export default function YachtScoreDetail() {
-	const params = useParams()
+export async function generateStaticParams(): Promise<IdArray> {
+	const url = buildPaginatedUrl('/api/yacht', '100', '0')
+	const result = await fetch(url.href)
+	const data: { Items: Yacht[] } = await result.json()
+	return data.Items.map((record: Yacht) => ({
+		id: record.id ? record.id.toString() : '0',
+	}))
+}
+
+export const dynamicParams = true
+
+export default function YachtScoreDetail({
+	params,
+}: {
+	params: { id: string }
+}) {
 	const { data, error, isLoading } = useSWR(
 		`${apiUrl}/api/yacht/${params.id}`,
 		fetcher
