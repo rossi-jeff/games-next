@@ -7,6 +7,5 @@ export const buildRequestHeaders = (session?: SessionData) => {
 	if (session && session.Token) {
 		headers['Authorization'] = `Bearer ${session.Token}`
 	}
-	console.log(headers)
 	return headers
 }
