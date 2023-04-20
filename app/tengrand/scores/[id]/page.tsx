@@ -9,6 +9,8 @@ import TenGrandScoreCard from '../../ten-grand-score-card'
 import Link from 'next/link'
 import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
 import { IdArray } from '../../../../types/id-array.type'
+import { Suspense } from 'react'
+import DetailPlaceHolder from '../../../../components/detail-place-holder'
 
 export async function generateStaticParams(): Promise<IdArray> {
 	const url = buildPaginatedUrl('/api/ten_grand', '100', '0')
@@ -39,11 +41,13 @@ export default function TenGrandScoreDetail({
 	return (
 		<div id="ten-grand-detail" className="m-2">
 			<h1>Ten Grand Score</h1>
-			<TenGrandScoreCard
-				turns={
-					tenGrand.turns && tenGrand.turns.length > 0 ? tenGrand.turns : []
-				}
-			/>
+			<Suspense fallback={<DetailPlaceHolder />}>
+				<TenGrandScoreCard
+					turns={
+						tenGrand.turns && tenGrand.turns.length > 0 ? tenGrand.turns : []
+					}
+				/>
+			</Suspense>
 			<Link href="/tengrand/scores">Back To Scores</Link>
 		</div>
 	)

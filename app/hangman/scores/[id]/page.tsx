@@ -11,6 +11,8 @@ import HangManLetterButtons from '../../hang-man-letter-buttons'
 import Link from 'next/link'
 import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
 import { IdArray } from '../../../../types/id-array.type'
+import { Suspense } from 'react'
+import DetailPlaceHolder from '../../../../components/detail-place-holder'
 
 export async function generateStaticParams(): Promise<IdArray> {
 	const url = buildPaginatedUrl('/api/hang_man', '100', '0')
@@ -40,15 +42,17 @@ export default function HangManScoreDetail({
 	return (
 		<div id="hang-man-detail" className="m-2">
 			<h1>Hang Man Score</h1>
-			<HangManDrawing wrong={hangMan.Wrong || ''} />
-			{hangMan.word && hangMan.word.Word && (
-				<HangManLost word={hangMan.word.Word} />
-			)}
-			<HangManLetterButtons
-				correct={hangMan.Correct || ''}
-				wrong={hangMan.Wrong || ''}
-				guess={() => {}}
-			/>
+			<Suspense fallback={<DetailPlaceHolder />}>
+				<HangManDrawing wrong={hangMan.Wrong || ''} />
+				{hangMan.word && hangMan.word.Word && (
+					<HangManLost word={hangMan.word.Word} />
+				)}
+				<HangManLetterButtons
+					correct={hangMan.Correct || ''}
+					wrong={hangMan.Wrong || ''}
+					guess={() => {}}
+				/>
+			</Suspense>
 			<Link href="/hangman/scores">Back To Scores</Link>
 		</div>
 	)

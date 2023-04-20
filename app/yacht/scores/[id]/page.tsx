@@ -9,6 +9,8 @@ import YachtScoreCard from '../../yacht-score-card'
 import Link from 'next/link'
 import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
 import { IdArray } from '../../../../types/id-array.type'
+import { Suspense } from 'react'
+import DetailPlaceHolder from '../../../../components/detail-place-holder'
 
 export async function generateStaticParams(): Promise<IdArray> {
 	const url = buildPaginatedUrl('/api/yacht', '100', '0')
@@ -39,10 +41,12 @@ export default function YachtScoreDetail({
 	return (
 		<div id="yacht-detail" className="m-2">
 			<h1>Yacht Score</h1>
-			<YachtScoreCard
-				total={yacht.Total || 0}
-				turns={yacht.turns && yacht.turns.length > 0 ? yacht.turns : []}
-			/>
+			<Suspense fallback={<DetailPlaceHolder />}>
+				<YachtScoreCard
+					total={yacht.Total || 0}
+					turns={yacht.turns && yacht.turns.length > 0 ? yacht.turns : []}
+				/>
+			</Suspense>
 			<Link href="/yacht/scores">Back To Scores</Link>
 		</div>
 	)

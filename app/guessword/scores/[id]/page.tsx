@@ -8,6 +8,8 @@ import GuessWordGuessList from '../../guess-word-guess-list'
 import Link from 'next/link'
 import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
 import { IdArray } from '../../../../types/id-array.type'
+import { Suspense } from 'react'
+import DetailPlaceHolder from '../../../../components/detail-place-holder'
 
 export async function generateStaticParams(): Promise<IdArray> {
 	const url = buildPaginatedUrl('/api/guess_word', '100', '0')
@@ -37,9 +39,11 @@ export default function GuessWordScoreDetail({
 	return (
 		<div id="guess-word-detail" className="m-2">
 			<h1>Guess Word Score</h1>
-			{guessWord && guessWord.guesses && guessWord.guesses.length > 0 && (
-				<GuessWordGuessList guesses={guessWord.guesses} />
-			)}
+			<Suspense fallback={<DetailPlaceHolder />}>
+				{guessWord && guessWord.guesses && guessWord.guesses.length > 0 && (
+					<GuessWordGuessList guesses={guessWord.guesses} />
+				)}
+			</Suspense>
 			<Link href="/guessword/scores">Back To Scores</Link>
 		</div>
 	)

@@ -9,6 +9,8 @@ import CodeBreakerSolution from '../../code-breaker-solution'
 import Link from 'next/link'
 import { IdArray } from '../../../../types/id-array.type'
 import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
+import { Suspense } from 'react'
+import DetailPlaceHolder from '../../../../components/detail-place-holder'
 
 export async function generateStaticParams(): Promise<IdArray> {
 	const url = buildPaginatedUrl('/api/code_breaker', '100', '0')
@@ -38,12 +40,16 @@ export default function CodeBreakerScoreDetail({
 	return (
 		<div id="code-breaker-detail" className="m-2">
 			<h1>Code Breaker Score</h1>
-			{codeBreaker && codeBreaker.guesses && codeBreaker.guesses.length > 0 && (
-				<CodeBreakerGuessList guesses={codeBreaker.guesses} />
-			)}
-			{codeBreaker && codeBreaker.codes && codeBreaker.codes.length > 0 && (
-				<CodeBreakerSolution codes={codeBreaker.codes} />
-			)}
+			<Suspense fallback={<DetailPlaceHolder />}>
+				{codeBreaker &&
+					codeBreaker.guesses &&
+					codeBreaker.guesses.length > 0 && (
+						<CodeBreakerGuessList guesses={codeBreaker.guesses} />
+					)}
+				{codeBreaker && codeBreaker.codes && codeBreaker.codes.length > 0 && (
+					<CodeBreakerSolution codes={codeBreaker.codes} />
+				)}
+			</Suspense>
 			<Link href="/codebreaker/scores">Back To Scores</Link>
 		</div>
 	)

@@ -11,6 +11,8 @@ import SeaBattleOpponentTurn from '../../sea-battle-opponent-turn'
 import Link from 'next/link'
 import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
 import { IdArray } from '../../../../types/id-array.type'
+import { Suspense } from 'react'
+import DetailPlaceHolder from '../../../../components/detail-place-holder'
 
 export async function generateStaticParams(): Promise<IdArray> {
 	const url = buildPaginatedUrl('/api/sea_battle', '100', '0')
@@ -40,38 +42,40 @@ export default function SeaBattleScoreDetail({
 	return (
 		<div id="sea-battle-detail" className="m-2">
 			<h1>Sea Battle Score</h1>
-			<SeaBattlePlayerTurn
-				axis={seaBattle.Axis || 8}
-				hasFired={true}
-				turns={
-					seaBattle && seaBattle.turns && seaBattle.turns.length > 0
-						? seaBattle.turns.filter((t) => t.Navy == Navy.Player)
-						: []
-				}
-				ships={
-					seaBattle && seaBattle.ships && seaBattle.ships.length > 0
-						? seaBattle.ships.filter((s) => s.Navy == Navy.Opponent)
-						: []
-				}
-				fire={() => {}}
-				toggle={() => {}}
-			/>
-			<SeaBattleOpponentTurn
-				axis={seaBattle.Axis || 8}
-				hasFired={true}
-				turns={
-					seaBattle && seaBattle.turns && seaBattle.turns.length > 0
-						? seaBattle.turns.filter((t) => t.Navy == Navy.Opponent)
-						: []
-				}
-				ships={
-					seaBattle && seaBattle.ships && seaBattle.ships.length > 0
-						? seaBattle.ships.filter((s) => s.Navy == Navy.Player)
-						: []
-				}
-				fire={() => {}}
-				toggle={() => {}}
-			/>
+			<Suspense fallback={<DetailPlaceHolder />}>
+				<SeaBattlePlayerTurn
+					axis={seaBattle.Axis || 8}
+					hasFired={true}
+					turns={
+						seaBattle && seaBattle.turns && seaBattle.turns.length > 0
+							? seaBattle.turns.filter((t) => t.Navy == Navy.Player)
+							: []
+					}
+					ships={
+						seaBattle && seaBattle.ships && seaBattle.ships.length > 0
+							? seaBattle.ships.filter((s) => s.Navy == Navy.Opponent)
+							: []
+					}
+					fire={() => {}}
+					toggle={() => {}}
+				/>
+				<SeaBattleOpponentTurn
+					axis={seaBattle.Axis || 8}
+					hasFired={true}
+					turns={
+						seaBattle && seaBattle.turns && seaBattle.turns.length > 0
+							? seaBattle.turns.filter((t) => t.Navy == Navy.Opponent)
+							: []
+					}
+					ships={
+						seaBattle && seaBattle.ships && seaBattle.ships.length > 0
+							? seaBattle.ships.filter((s) => s.Navy == Navy.Player)
+							: []
+					}
+					fire={() => {}}
+					toggle={() => {}}
+				/>
+			</Suspense>
 			<Link href="/seabattle/scores">Back To Scores</Link>
 		</div>
 	)
