@@ -12,9 +12,9 @@ import PaginatedPlaceHolder from '../../../components/paginated-place-holder'
 
 export default function HangManScores() {
 	const path = '/api/hang_man'
-	const searchParams = useSearchParams()
-	const limit = searchParams.get('limit')
-	const offset = searchParams.get('offset')
+	const params = useSearchParams()
+	const limit = params.get('limit') || undefined
+	const offset = params.get('offset') || undefined
 	const url = buildPaginatedUrl(path, limit, offset)
 	const { data, error, isLoading } = useSWR(url.href, fetcher)
 	const router = useRouter()

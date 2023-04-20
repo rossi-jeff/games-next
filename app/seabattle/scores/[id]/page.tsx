@@ -1,6 +1,5 @@
 'use client'
 
-import { useParams } from 'next/navigation'
 import { apiUrl } from '../../../../lib/api-url'
 import { fetcher } from '../../../../lib/fetcher'
 import useSWR from 'swr'
@@ -9,27 +8,14 @@ import { Navy } from '../../../../enum/navy.enum'
 import SeaBattlePlayerTurn from '../../sea-battle-player-turn'
 import SeaBattleOpponentTurn from '../../sea-battle-opponent-turn'
 import Link from 'next/link'
-import { buildPaginatedUrl } from '../../../../lib/get-paginated-scores'
-import { IdArray } from '../../../../types/id-array.type'
 import { Suspense } from 'react'
 import DetailPlaceHolder from '../../../../components/detail-place-holder'
-
-export async function generateStaticParams(): Promise<IdArray> {
-	const url = buildPaginatedUrl('/api/sea_battle', '100', '0')
-	const result = await fetch(url.href)
-	const data: { Items: SeaBattle[] } = await result.json()
-	return data.Items.map((record: SeaBattle) => ({
-		id: record.id ? record.id.toString() : '0',
-	}))
-}
+import { useParams } from 'next/navigation'
 
 export const dynamicParams = true
 
-export default function SeaBattleScoreDetail({
-	params,
-}: {
-	params: { id: string }
-}) {
+export default function SeaBattleScoreDetail() {
+	const params = useParams()
 	const { data, error, isLoading } = useSWR(
 		`${apiUrl}/api/sea_battle/${params.id}`,
 		fetcher

@@ -3,10 +3,15 @@ import { apiUrl } from './api-url'
 export const defaultLimit = 10
 export const defaultOffset = 0
 
+export const defaultSearchParams = {
+	limit: defaultLimit,
+	offset: defaultOffset,
+}
+
 export const buildPaginatedUrl = (
 	path: string,
-	limit: string | null,
-	offset: string | null
+	limit: string | undefined,
+	offset: string | undefined
 ) => {
 	const url = new URL(path, apiUrl)
 	const Limit = limit ? parseInt(String(limit)) : defaultLimit
@@ -20,8 +25,8 @@ export const buildPaginatedUrl = (
 
 export const getPaginatedScores = async (
 	path: string,
-	limit: string | null,
-	offset: string | null
+	limit: string | undefined,
+	offset: string | undefined
 ) => {
 	const url = buildPaginatedUrl(path, limit, offset)
 	console.log({ url })
