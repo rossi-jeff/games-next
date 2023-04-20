@@ -9,6 +9,7 @@ import { SeaBattle } from '../../../types/sea-battle.type'
 import SeaBattleScoreRow from './sea-battle-score-row'
 import { Suspense } from 'react'
 import PaginatedPlaceHolder from '../../../components/paginated-place-holder'
+import LoadingIndicator from '../../../components/loading-indicator'
 
 export default function SeaBattleScores() {
 	const path = '/api/sea_battle'
@@ -20,7 +21,7 @@ export default function SeaBattleScores() {
 	const router = useRouter()
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const { Items, Count, Limit, Offset } = data
 
@@ -36,27 +37,28 @@ export default function SeaBattleScores() {
 	return (
 		<div id="sea-battle-scores" className="m-2">
 			<h1>Sea Battle Scores</h1>
-			<div>
-				<div className="score-header">
-					<div className="cell-left"></div>
-					<div className="cell-center">User</div>
-					<div className="cell-center">Status</div>
-					<div className="cell-center">Score</div>
-					<div className="cell-right">Axis</div>
-				</div>
-				<Suspense fallback={<PaginatedPlaceHolder />}>
+			<Suspense fallback={<PaginatedPlaceHolder />}>
+				<div>
+					<div className="score-header">
+						<div className="cell-left"></div>
+						<div className="cell-center">User</div>
+						<div className="cell-center">Status</div>
+						<div className="cell-center">Score</div>
+						<div className="cell-right">Axis</div>
+					</div>
+
 					{Items.map((sea_battle: SeaBattle) => (
 						<SeaBattleScoreRow key={sea_battle.id} sea_battle={sea_battle} />
 					))}
-				</Suspense>
-			</div>
-			<PaginationControl
-				count={Count}
-				limit={Limit}
-				offset={Offset}
-				pageChanged={(page: number) => pageChanged(page)}
-				limitChanged={(limit: number) => limitChanged(limit)}
-			/>
+				</div>
+				<PaginationControl
+					count={Count}
+					limit={Limit}
+					offset={Offset}
+					pageChanged={(page: number) => pageChanged(page)}
+					limitChanged={(limit: number) => limitChanged(limit)}
+				/>
+			</Suspense>
 		</div>
 	)
 }

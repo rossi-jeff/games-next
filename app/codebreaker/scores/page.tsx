@@ -9,6 +9,7 @@ import PaginatedPlaceHolder from '../../../components/paginated-place-holder'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { fetcher } from '../../../lib/fetcher'
 import useSWR from 'swr'
+import LoadingIndicator from '../../../components/loading-indicator'
 
 export default function CodeBreakerScores() {
 	const path = '/api/code_breaker'
@@ -20,7 +21,7 @@ export default function CodeBreakerScores() {
 	const { data, error, isLoading } = useSWR(url.href, fetcher)
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const { Items, Count, Limit, Offset } = data
 
@@ -36,31 +37,32 @@ export default function CodeBreakerScores() {
 	return (
 		<div id="code-breaker-scores" className="m-2">
 			<h1>Code Breaker Scores</h1>
-			<div>
-				<div className="score-header">
-					<div className="cell-left"></div>
-					<div className="cell-center">User</div>
-					<div className="cell-center">Status</div>
-					<div className="cell-center">Score</div>
-					<div className="cell-center">Colors</div>
-					<div className="cell-right">Columns</div>
-				</div>
-				<Suspense fallback={<PaginatedPlaceHolder />}>
+			<Suspense fallback={<PaginatedPlaceHolder />}>
+				<div>
+					<div className="score-header">
+						<div className="cell-left"></div>
+						<div className="cell-center">User</div>
+						<div className="cell-center">Status</div>
+						<div className="cell-center">Score</div>
+						<div className="cell-center">Colors</div>
+						<div className="cell-right">Columns</div>
+					</div>
+
 					{Items.map((code_breaker: CodeBreaker) => (
 						<CodeBreakerScoreRow
 							key={code_breaker.id}
 							code_breaker={code_breaker}
 						/>
 					))}
-				</Suspense>
-			</div>
-			<PaginationControl
-				count={Count}
-				limit={Limit}
-				offset={Offset}
-				pageChanged={(page: number) => pageChanged(page)}
-				limitChanged={(limit: number) => limitChanged(limit)}
-			/>
+				</div>
+				<PaginationControl
+					count={Count}
+					limit={Limit}
+					offset={Offset}
+					pageChanged={(page: number) => pageChanged(page)}
+					limitChanged={(limit: number) => limitChanged(limit)}
+				/>
+			</Suspense>
 		</div>
 	)
 }

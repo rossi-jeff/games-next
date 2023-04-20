@@ -9,6 +9,7 @@ import { HangMan } from '../../../types/hang-man.type'
 import HangManScoreRow from './hang-man-score-row'
 import { Suspense } from 'react'
 import PaginatedPlaceHolder from '../../../components/paginated-place-holder'
+import LoadingIndicator from '../../../components/loading-indicator'
 
 export default function HangManScores() {
 	const path = '/api/hang_man'
@@ -20,7 +21,7 @@ export default function HangManScores() {
 	const router = useRouter()
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const { Items, Count, Limit, Offset } = data
 
@@ -36,29 +37,30 @@ export default function HangManScores() {
 	return (
 		<div id="hang-man-scores" className="m-2">
 			<h1>Hang man Scores</h1>
-			<div>
-				<div className="score-header">
-					<div className="cell-left"></div>
-					<div className="cell-center">User</div>
-					<div className="cell-center">Status</div>
-					<div className="cell-center">Score</div>
-					<div className="cell-center">Correct</div>
-					<div className="cell-center">Wrong</div>
-					<div className="cell-right">Word</div>
-				</div>
-				<Suspense fallback={<PaginatedPlaceHolder />}>
+			<Suspense fallback={<PaginatedPlaceHolder />}>
+				<div>
+					<div className="score-header">
+						<div className="cell-left"></div>
+						<div className="cell-center">User</div>
+						<div className="cell-center">Status</div>
+						<div className="cell-center">Score</div>
+						<div className="cell-center">Correct</div>
+						<div className="cell-center">Wrong</div>
+						<div className="cell-right">Word</div>
+					</div>
+
 					{Items.map((hang_man: HangMan) => (
 						<HangManScoreRow key={hang_man.id} hang_man={hang_man} />
 					))}
-				</Suspense>
-			</div>
-			<PaginationControl
-				count={Count}
-				limit={Limit}
-				offset={Offset}
-				pageChanged={(page: number) => pageChanged(page)}
-				limitChanged={(limit: number) => limitChanged(limit)}
-			/>
+				</div>
+				<PaginationControl
+					count={Count}
+					limit={Limit}
+					offset={Offset}
+					pageChanged={(page: number) => pageChanged(page)}
+					limitChanged={(limit: number) => limitChanged(limit)}
+				/>
+			</Suspense>
 		</div>
 	)
 }

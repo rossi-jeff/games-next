@@ -9,6 +9,7 @@ import GuessWordScoreRow from './guess-word-score-row'
 import { GuessWord } from '../../../types/guess-word.type'
 import { Suspense } from 'react'
 import PaginatedPlaceHolder from '../../../components/paginated-place-holder'
+import LoadingIndicator from '../../../components/loading-indicator'
 
 export default function GuessWordScores() {
 	const path = '/api/guess_word'
@@ -20,7 +21,7 @@ export default function GuessWordScores() {
 	const router = useRouter()
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const { Items, Count, Limit, Offset } = data
 
@@ -36,28 +37,29 @@ export default function GuessWordScores() {
 	return (
 		<div id="guess-word-scores" className="m-2">
 			<h1>Guess Word Scores</h1>
-			<div>
-				<div className="score-header">
-					<div className="cell-left"></div>
-					<div className="cell-center">User</div>
-					<div className="cell-center">Status</div>
-					<div className="cell-center">Score</div>
-					<div className="cell-center">Word</div>
-					<div className="cell-right">Length</div>
-				</div>
-				<Suspense fallback={<PaginatedPlaceHolder />}>
+			<Suspense fallback={<PaginatedPlaceHolder />}>
+				<div>
+					<div className="score-header">
+						<div className="cell-left"></div>
+						<div className="cell-center">User</div>
+						<div className="cell-center">Status</div>
+						<div className="cell-center">Score</div>
+						<div className="cell-center">Word</div>
+						<div className="cell-right">Length</div>
+					</div>
+
 					{Items.map((guess_word: GuessWord) => (
 						<GuessWordScoreRow key={guess_word.id} guess_word={guess_word} />
 					))}
-				</Suspense>
-			</div>
-			<PaginationControl
-				count={Count}
-				limit={Limit}
-				offset={Offset}
-				pageChanged={(page: number) => pageChanged(page)}
-				limitChanged={(limit: number) => limitChanged(limit)}
-			/>
+				</div>
+				<PaginationControl
+					count={Count}
+					limit={Limit}
+					offset={Offset}
+					pageChanged={(page: number) => pageChanged(page)}
+					limitChanged={(limit: number) => limitChanged(limit)}
+				/>
+			</Suspense>
 		</div>
 	)
 }

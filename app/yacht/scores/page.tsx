@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Yacht } from '../../../types/yacht.type'
 import { Suspense } from 'react'
 import PaginatedPlaceHolder from '../../../components/paginated-place-holder'
+import LoadingIndicator from '../../../components/loading-indicator'
 
 export default function YachtScores() {
 	const path = '/api/yacht'
@@ -20,7 +21,7 @@ export default function YachtScores() {
 	const router = useRouter()
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const { Items, Count, Limit, Offset } = data
 
@@ -36,23 +37,25 @@ export default function YachtScores() {
 	return (
 		<div id="yacht-scores" className="m-2">
 			<h1>Yacht Scores</h1>
-			<div className="score-header">
-				<div className="cell-left"></div>
-				<div className="cell-center">User</div>
-				<div className="cell-right">Score</div>
-			</div>
 			<Suspense fallback={<PaginatedPlaceHolder />}>
+				<div className="score-header">
+					<div className="cell-left"></div>
+					<div className="cell-center">User</div>
+					<div className="cell-right">Score</div>
+				</div>
+
 				{Items.map((yacht: Yacht) => (
 					<YachtScoreRow key={yacht.id} yacht={yacht} />
 				))}
+
+				<PaginationControl
+					count={Count}
+					limit={Limit}
+					offset={Offset}
+					pageChanged={(page: number) => pageChanged(page)}
+					limitChanged={(limit: number) => limitChanged(limit)}
+				/>
 			</Suspense>
-			<PaginationControl
-				count={Count}
-				limit={Limit}
-				offset={Offset}
-				pageChanged={(page: number) => pageChanged(page)}
-				limitChanged={(limit: number) => limitChanged(limit)}
-			/>
 		</div>
 	)
 }

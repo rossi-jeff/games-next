@@ -11,8 +11,9 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import DetailPlaceHolder from '../../../../components/detail-place-holder'
 import { useParams } from 'next/navigation'
+import LoadingIndicator from '../../../../components/loading-indicator'
 
-export const dynamicParams = true
+export const revalidate = 0
 
 export default function HangManScoreDetail() {
 	const params = useParams()
@@ -22,7 +23,7 @@ export default function HangManScoreDetail() {
 	)
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const hangMan: HangMan = data
 	return (

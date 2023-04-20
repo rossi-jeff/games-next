@@ -9,6 +9,7 @@ import { TenGrand } from '../../../types/ten-grand.type'
 import TenGrandScoreRow from './ten-grand-score-row'
 import { Suspense } from 'react'
 import PaginatedPlaceHolder from '../../../components/paginated-place-holder'
+import LoadingIndicator from '../../../components/loading-indicator'
 
 export default function TenGrandScores() {
 	const path = '/api/ten_grand'
@@ -20,7 +21,7 @@ export default function TenGrandScores() {
 	const router = useRouter()
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const { Items, Count, Limit, Offset } = data
 
@@ -36,26 +37,27 @@ export default function TenGrandScores() {
 	return (
 		<div id="ten-grand-scores" className="m-2">
 			<h1>Ten Grand Scores</h1>
-			<div>
-				<div className="score-header">
-					<div className="cell-left"></div>
-					<div className="cell-center">User</div>
-					<div className="cell-center">Status</div>
-					<div className="cell-right">Score</div>
-				</div>
-				<Suspense fallback={<PaginatedPlaceHolder />}>
+			<Suspense fallback={<PaginatedPlaceHolder />}>
+				<div>
+					<div className="score-header">
+						<div className="cell-left"></div>
+						<div className="cell-center">User</div>
+						<div className="cell-center">Status</div>
+						<div className="cell-right">Score</div>
+					</div>
+
 					{Items.map((ten_grand: TenGrand) => (
 						<TenGrandScoreRow key={ten_grand.id} ten_grand={ten_grand} />
 					))}
-				</Suspense>
-			</div>
-			<PaginationControl
-				count={Count}
-				limit={Limit}
-				offset={Offset}
-				pageChanged={(page: number) => pageChanged(page)}
-				limitChanged={(limit: number) => limitChanged(limit)}
-			/>
+				</div>
+				<PaginationControl
+					count={Count}
+					limit={Limit}
+					offset={Offset}
+					pageChanged={(page: number) => pageChanged(page)}
+					limitChanged={(limit: number) => limitChanged(limit)}
+				/>
+			</Suspense>
 		</div>
 	)
 }

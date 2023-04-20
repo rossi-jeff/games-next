@@ -9,8 +9,9 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import DetailPlaceHolder from '../../../../components/detail-place-holder'
 import { useParams } from 'next/navigation'
+import LoadingIndicator from '../../../../components/loading-indicator'
 
-export const dynamicParams = true
+export const revalidate = 0
 
 export default function YachtScoreDetail() {
 	const params = useParams()
@@ -20,7 +21,7 @@ export default function YachtScoreDetail() {
 	)
 
 	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (isLoading) return <LoadingIndicator />
 
 	const yacht: Yacht = data
 
