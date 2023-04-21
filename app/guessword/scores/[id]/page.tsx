@@ -11,8 +11,6 @@ import DetailPlaceHolder from '../../../../components/detail-place-holder'
 import { useParams } from 'next/navigation'
 import LoadingIndicator from '../../../../components/loading-indicator'
 
-export const revalidate = 0
-
 export default function GuessWordScoreDetail() {
 	const params = useParams()
 	const { data, error, isLoading } = useSWR(

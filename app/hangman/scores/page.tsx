@@ -36,7 +36,7 @@ export default function HangManScores() {
 
 	return (
 		<div id="hang-man-scores" className="m-2">
-			<h1>Hang man Scores</h1>
+			<h1>Hang Man Scores</h1>
 			<Suspense fallback={<PaginatedPlaceHolder />}>
 				<div>
 					<div className="score-header">

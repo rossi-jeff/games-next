@@ -9,7 +9,9 @@ export default function TenGrandScoreRow({
 	return (
 		<div className="score-row">
 			<div className="cell-left">
-				<Link href={'/tengrand/scores/' + ten_grand.id}>View</Link>
+				<Link href={'/tengrand/scores/' + ten_grand.id} prefetch={false}>
+					View
+				</Link>
 			</div>
 			<div className="cell-center">
 				{ten_grand.user ? ten_grand.user.UserName : 'Anonymous'}
