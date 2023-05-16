@@ -9,7 +9,9 @@ export default function CodeBreakerScoreRow({
 	return (
 		<div className="score-row">
 			<div className="cell-left">
-				<Link href={'/codebreaker/scores/' + code_breaker.id}>View</Link>
+				<Link href={'/codebreaker/scores/' + code_breaker.id} prefetch={false}>
+					View
+				</Link>
 			</div>
 			<div className="cell-center">
 				{code_breaker.user ? code_breaker.user.UserName : 'Anonymous'}

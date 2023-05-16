@@ -6,7 +6,9 @@ export default function YachtScoreRow({ yacht }: { yacht: Yacht }) {
 	return (
 		<div className="score-row">
 			<div className="cell-left">
-				<Link href={'/yacht/scores/' + yacht.id}>View</Link>
+				<Link href={'/yacht/scores/' + yacht.id} prefetch={false}>
+					View
+				</Link>
 			</div>
 			<div className="cell-center">
 				{yacht.user ? yacht.user.UserName : 'Anonymous'}

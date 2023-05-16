@@ -9,7 +9,9 @@ export default function SeaBattleScoreRow({
 	return (
 		<div className="score-row">
 			<div className="cell-left">
-				<Link href={'/seabattle/scores/' + sea_battle.id}>View</Link>
+				<Link href={'/seabattle/scores/' + sea_battle.id} prefetch={false}>
+					View
+				</Link>
 			</div>
 			<div className="cell-center">
 				{sea_battle.user ? sea_battle.user.UserName : 'Anonymous'}

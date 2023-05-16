@@ -1,38 +1,50 @@
-'use client'
-
-import { useParams } from 'next/navigation'
 import { apiUrl } from '../../../../lib/api-url'
-import { fetcher } from '../../../../lib/fetcher'
-import useSWR from 'swr'
 import { HangMan } from '../../../../types/hang-man.type'
 import HangManDrawing from '../../hang-man-drawing'
 import HangManLost from '../../hang-man-lost'
-import HangManLetterButtons from '../../hang-man-letter-buttons'
 import Link from 'next/link'
+import { Suspense } from 'react'
+import DetailPlaceHolder from '../../../../components/detail-place-holder'
+import HangManGuessedLetters from './hang-man-guessed-letters'
 
-export default function HangManScoreDetail() {
-	const params = useParams()
-	const { data, error, isLoading } = useSWR(
-		`${apiUrl}/api/hang_man/${params.id}`,
-		fetcher
-	)
+export async function generateStaticParams() {
+	const results = await fetch(`${apiUrl}/api/hang_man?Limit=100`)
 
-	if (error) return <div>{error}</div>
-	if (isLoading) return <div>Loading ...</div>
+	if (!results.ok) return []
 
-	const hangMan: HangMan = data
+	const { Items }: { Items: HangMan[] } = await results.json()
+
+	return Items.map((item) => ({ id: item.id }))
+}
+
+async function getHangMan(id: string) {
+	const result = await fetch(`${apiUrl}/api/hang_man/${id}`)
+
+	if (!result.ok) return {}
+
+	const hangMan: HangMan = await result.json()
+	return hangMan
+}
+
+export default async function HangManScoreDetail({
+	params,
+}: {
+	params: { id: string }
+}) {
+	const hangMan: HangMan = await getHangMan(params.id)
 	return (
 		<div id="hang-man-detail" className="m-2">
 			<h1>Hang Man Score</h1>
-			<HangManDrawing wrong={hangMan.Wrong || ''} />
-			{hangMan.word && hangMan.word.Word && (
-				<HangManLost word={hangMan.word.Word} />
-			)}
-			<HangManLetterButtons
-				correct={hangMan.Correct || ''}
-				wrong={hangMan.Wrong || ''}
-				guess={() => {}}
-			/>
+			<Suspense fallback={<DetailPlaceHolder />}>
+				<HangManDrawing wrong={hangMan.Wrong || ''} />
+				{hangMan.word && hangMan.word.Word && (
+					<HangManLost word={hangMan.word.Word} />
+				)}
+				<HangManGuessedLetters
+					correct={hangMan.Correct || ''}
+					wrong={hangMan.Wrong || ''}
+				/>
+			</Suspense>
 			<Link href="/hangman/scores">Back To Scores</Link>
 		</div>
 	)

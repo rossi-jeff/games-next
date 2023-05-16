@@ -124,9 +124,9 @@ export default function NavBar() {
 
 	return (
 		<nav id="nav-bar">
-			<div className="flex flex-wrap justify-between">
+			<div className="flex flex-wrap justify-between min-h-fit pb-1">
 				<h1>Games By Jeff Rossi</h1>
-				<div className="flex flex-wrap justify-end pr-2">
+				<div className="flex flex-wrap justify-end">
 					<SessionButtons
 						session={session}
 						showRegister={showRegister}
@@ -135,7 +135,10 @@ export default function NavBar() {
 					/>
 				</div>
 			</div>
-			<div id="main-links" className="flex flex-wrap justify-between">
+			<div
+				id="main-links"
+				className="flex flex-wrap justify-between min-h-fit pt-1"
+			>
 				<Link href="/" className={pathName == '/' ? 'active' : ''}>
 					Home
 				</Link>
