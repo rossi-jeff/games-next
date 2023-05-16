@@ -1,5 +1,3 @@
-'use client'
-
 import { apiUrl } from '../../../../lib/api-url'
 import { CodeBreaker } from '../../../../types/code-breaker.type'
 import CodeBreakerGuessList from '../../code-breaker-guess-list'
@@ -7,22 +5,32 @@ import CodeBreakerSolution from '../../code-breaker-solution'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import DetailPlaceHolder from '../../../../components/detail-place-holder'
-import { fetcher } from '../../../../lib/fetcher'
-import useSWR from 'swr'
-import { useParams } from 'next/navigation'
-import LoadingIndicator from '../../../../components/loading-indicator'
 
-export default function CodeBreakerScoreDetail() {
-	const params = useParams()
-	const { data, error, isLoading } = useSWR(
-		`${apiUrl}/api/code_breaker/${params.id}`,
-		fetcher
-	)
+export async function generateStaticParams() {
+	const results = await fetch(`${apiUrl}/api/code_breaker?Limit=100`)
 
-	if (error) return <div>{error}</div>
-	if (isLoading) return <LoadingIndicator />
+	if (!results.ok) return []
 
-	const codeBreaker: CodeBreaker = data
+	const { Items }: { Items: CodeBreaker[] } = await results.json()
+
+	return Items.map((item) => ({ id: item.id }))
+}
+
+async function getCodeBreaker(id: string) {
+	const result = await fetch(`${apiUrl}/api/code_breaker/${id}`)
+
+	if (!result.ok) return {}
+
+	const codeBreaker: CodeBreaker = await result.json()
+	return codeBreaker
+}
+
+export default async function CodeBreakerScoreDetail({
+	params,
+}: {
+	params: { id: string }
+}) {
+	const codeBreaker: CodeBreaker = await getCodeBreaker(params.id)
 	return (
 		<div id="code-breaker-detail" className="m-2">
 			<h1>Code Breaker Score</h1>

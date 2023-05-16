@@ -259,13 +259,18 @@ select.Yellow {
 .visible {
 	visibility: visible !important;
 }
+#hang-man-guessed-letters div {
+	@apply border border-white px-2 py-1 rounded bg-slate-400 text-black mr-2;
+}
 button.letter {
 	@apply mr-2;
 }
-button.correct {
+button.correct,
+#hang-man-guessed-letters div.correct {
 	@apply text-white bg-green-600;
 }
-button.wrong {
+button.wrong,
+#hang-man-guessed-letters div.wrong {
 	@apply text-white bg-red-600;
 }
 .hang-man-letter {

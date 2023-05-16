@@ -1,36 +1,43 @@
-'use client'
-
 import { apiUrl } from '../../../../lib/api-url'
-import { fetcher } from '../../../../lib/fetcher'
-import useSWR from 'swr'
 import { SeaBattle } from '../../../../types/sea-battle.type'
 import { Navy } from '../../../../enum/navy.enum'
-import SeaBattlePlayerTurn from '../../sea-battle-player-turn'
-import SeaBattleOpponentTurn from '../../sea-battle-opponent-turn'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import DetailPlaceHolder from '../../../../components/detail-place-holder'
-import { useParams } from 'next/navigation'
-import LoadingIndicator from '../../../../components/loading-indicator'
+import SeaBattlePlayerTurnDisplay from './sea-battle-player-turn-display'
+import SeaBattleOpponentTurnDisplay from './sea-battle-opponent-turn-display'
 
-export default function SeaBattleScoreDetail() {
-	const params = useParams()
-	const { data, error, isLoading } = useSWR(
-		`${apiUrl}/api/sea_battle/${params.id}`,
-		fetcher
-	)
+export async function generateStaticParams() {
+	const results = await fetch(`${apiUrl}/api/sea_battle?Limit=100`)
 
-	if (error) return <div>{error}</div>
-	if (isLoading) return <LoadingIndicator />
+	if (!results.ok) return []
 
-	const seaBattle: SeaBattle = data
+	const { Items }: { Items: SeaBattle[] } = await results.json()
+
+	return Items.map((item) => ({ id: item.id }))
+}
+
+async function getSeabattle(id: string) {
+	const result = await fetch(`${apiUrl}/api/sea_battle/${id}`)
+
+	if (!result.ok) return {}
+
+	const seaBattle: SeaBattle = await result.json()
+	return seaBattle
+}
+
+export default async function SeaBattleScoreDetail({
+	params,
+}: {
+	params: { id: string }
+}) {
+	const seaBattle: SeaBattle = await getSeabattle(params.id)
 	return (
 		<div id="sea-battle-detail" className="m-2">
 			<h1>Sea Battle Score</h1>
 			<Suspense fallback={<DetailPlaceHolder />}>
-				<SeaBattlePlayerTurn
+				<SeaBattlePlayerTurnDisplay
 					axis={seaBattle.Axis || 8}
-					hasFired={true}
 					turns={
 						seaBattle && seaBattle.turns && seaBattle.turns.length > 0
 							? seaBattle.turns.filter((t) => t.Navy == Navy.Player)
@@ -41,12 +48,9 @@ export default function SeaBattleScoreDetail() {
 							? seaBattle.ships.filter((s) => s.Navy == Navy.Opponent)
 							: []
 					}
-					fire={() => {}}
-					toggle={() => {}}
 				/>
-				<SeaBattleOpponentTurn
+				<SeaBattleOpponentTurnDisplay
 					axis={seaBattle.Axis || 8}
-					hasFired={true}
 					turns={
 						seaBattle && seaBattle.turns && seaBattle.turns.length > 0
 							? seaBattle.turns.filter((t) => t.Navy == Navy.Opponent)
@@ -57,8 +61,6 @@ export default function SeaBattleScoreDetail() {
 							? seaBattle.ships.filter((s) => s.Navy == Navy.Player)
 							: []
 					}
-					fire={() => {}}
-					toggle={() => {}}
 				/>
 			</Suspense>
 			<Link href="/seabattle/scores">Back To Scores</Link>
