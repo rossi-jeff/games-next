@@ -100,7 +100,9 @@ export default function CodeBreakerGame() {
 			) : (
 				<CodeBreakerGameOptions newGame={newGame} />
 			)}
-			<CodeBreakerDirections />
+			{codeBreaker && codeBreaker.Status != GameStatus.Playing && (
+				<CodeBreakerDirections />
+			)}
 		</div>
 	)
 }

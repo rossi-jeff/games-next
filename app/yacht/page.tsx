@@ -58,16 +58,18 @@ export default function YachtGame() {
 			{yacht && yacht.NumTurns != undefined && yacht.NumTurns < 12 ? (
 				<YachtPlaying yacht={yacht} reloadGame={reloadGame} />
 			) : (
-				<button onClick={createGame} className="mb-2">
-					New Game
-				</button>
+				<>
+					<button onClick={createGame} className="mb-2">
+						New Game
+					</button>
+					<YachtDirections />
+				</>
 			)}
 			{yacht.Total != undefined &&
 				yacht.turns != undefined &&
 				yacht.turns.length > 0 && (
 					<YachtScoreCard total={yacht.Total} turns={yacht.turns} />
 				)}
-			<YachtDirections />
 		</div>
 	)
 }

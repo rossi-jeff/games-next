@@ -167,7 +167,9 @@ export default function GuessWordGame() {
 					showChanged={showChanged}
 				/>
 			)}
-			<GuessWordDirections />
+			{guessWord && guessWord.Status != GameStatus.Playing && (
+				<GuessWordDirections />
+			)}
 		</div>
 	)
 }
