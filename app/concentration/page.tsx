@@ -11,6 +11,7 @@ import PlayingCard from '@/components/playing-card'
 import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import ConcentrationDirections from '../../components/concentration-directions'
 
 type ClickedCardType = { first: number; second: number }
 
@@ -181,7 +182,11 @@ export default function ConcentrationGame() {
 
 	return (
 		<div id="concentration-game" className="m-2">
-			<h1>Concentration</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Concentration</h1>
+				<Link href="/concentration/scores">Scores</Link>
+			</div>
+
 			<div className="flex flex-wrap justify-between">
 				<div>
 					{concentration.Status != GameStatus.Playing && (
@@ -233,7 +238,9 @@ export default function ConcentrationGame() {
 						</div>
 					))}
 			</div>
-			<Link href="/concentration/scores">Scores</Link>
+			{concentration.Status != GameStatus.Playing && (
+				<ConcentrationDirections />
+			)}
 		</div>
 	)
 }

@@ -13,6 +13,7 @@ import { apiUrl } from '@/lib/api-url'
 import { buildRequestHeaders } from '@/lib/build-request-headers'
 import HangManLost from './hang-man-lost'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import HangManDiections from '../../components/hang-man-directions'
 
 export default function HangManGame() {
 	const [hangMan, setHangMan] = useState<HangMan>({})
@@ -103,7 +104,11 @@ export default function HangManGame() {
 
 	return (
 		<div className="hang-man-game m-2">
-			<h1>Hang Man</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Hang Man</h1>
+				<Link href="/hangman/scores">Scores</Link>
+			</div>
+
 			<HangManDrawing wrong={hangMan.Wrong || ''} />
 			{(hangMan.Status == GameStatus.Lost ||
 				hangMan.Status == GameStatus.Won) &&
@@ -120,8 +125,7 @@ export default function HangManGame() {
 			) : (
 				<HangManGameOptions newGame={newGame} />
 			)}
-
-			<Link href="/hangman/scores">Scores</Link>
+			{hangMan && hangMan.Status != GameStatus.Playing && <HangManDiections />}
 		</div>
 	)
 }

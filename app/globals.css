@@ -300,11 +300,25 @@ button.wrong,
 div.directions-content.open {
 	@apply block rounded-box mt-2 px-2 py-1;
 }
-.scoring-grid {
+.scoring-grid,
+.ten-grand-scoring-grid {
 	@apply border border-dashed rounded border-white my-2 p-2;
 }
-.scoring-grid-row {
+.scoring-grid-row,
+.ten-grand-individual-scores .individual,
+.ten-grand-multiple-scores .multiple {
 	@apply flex flex-wrap px-2 border-b border-dotted border-white;
+}
+.ten-grand-individual-scores .individuals-header,
+.ten-grand-multiple-scores .multiples-header {
+	@apply flex flex-wrap  bg-slate-800 text-white py-1 px-2 my-1;
+}
+.ten-grand-individual-scores .roll {
+	@apply flex-grow;
+}
+.ten-grand-multiple-scores .multiples-header,
+.ten-grand-multiple-scores .multiple {
+	@apply justify-between;
 }
 .scoring-grid-row .category {
 	@apply w-32;
