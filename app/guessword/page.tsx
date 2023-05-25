@@ -14,6 +14,7 @@ import { HintArgsType } from '@/types/hint-args.type'
 import { Rating } from '@/enum/rating.enum'
 import GuessWordGuessList from './guess-word-guess-list'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import GuessWordDirections from '../../components/guess-word-directions'
 
 export default function GuessWordGame() {
 	const [guessWord, setGuessWord] = useState<GuessWord>({})
@@ -145,7 +146,11 @@ export default function GuessWordGame() {
 
 	return (
 		<div className="m-2">
-			<h1>Guess Word</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Guess Word</h1>
+				<Link href="/guessword/scores">Scores</Link>
+			</div>
+
 			{guessWord && guessWord.guesses && guessWord.guesses.length > 0 && (
 				<GuessWordGuessList guesses={guessWord.guesses} />
 			)}
@@ -162,8 +167,7 @@ export default function GuessWordGame() {
 					showChanged={showChanged}
 				/>
 			)}
-
-			<Link href="/guessword/scores">Scores</Link>
+			<GuessWordDirections />
 		</div>
 	)
 }

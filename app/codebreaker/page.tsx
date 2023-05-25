@@ -11,6 +11,7 @@ import { GameStatus } from '../../enum/game-status.enum'
 import CodeBreakerGuessList from './code-breaker-guess-list'
 import CodeBreakerSolution from './code-breaker-solution'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import CodeBreakerDirections from '../../components/code-breaker-directions'
 
 export default function CodeBreakerGame() {
 	const [columns, setColumns] = useState<number>(4)
@@ -76,7 +77,11 @@ export default function CodeBreakerGame() {
 
 	return (
 		<div className="m-2">
-			<h1>Code Breaker</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Code Breaker</h1>
+				<Link href="/codebreaker/scores">Scores</Link>
+			</div>
+
 			{codeBreaker && codeBreaker.guesses && codeBreaker.guesses.length > 0 && (
 				<CodeBreakerGuessList guesses={codeBreaker.guesses} />
 			)}
@@ -95,8 +100,7 @@ export default function CodeBreakerGame() {
 			) : (
 				<CodeBreakerGameOptions newGame={newGame} />
 			)}
-
-			<Link href="/codebreaker/scores">Scores</Link>
+			<CodeBreakerDirections />
 		</div>
 	)
 }
