@@ -335,3 +335,9 @@ div.directions-content.open {
 .directions-content a {
 	@apply font-bold;
 }
+.ps-column-header {
+	@apply h-4 font-bold text-center w-28;
+}
+.ps-row-label {
+	@apply w-4 font-bold h-[9.5rem] pt-16;
+}
