@@ -30,10 +30,10 @@ li {
 	@apply underline text-yellow-300;
 }
 .modal-wrapper {
-	@apply fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto w-full h-full hidden;
+	@apply fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto w-full h-full hidden z-30;
 }
 .modal-content {
-	@apply rounded-box w-72 mx-auto hidden relative top-24;
+	@apply rounded-box w-72 mx-auto hidden relative top-24 z-40;
 }
 .modal-content input {
 	@apply text-black border border-black rounded p-1;
