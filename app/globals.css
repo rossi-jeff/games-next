@@ -90,6 +90,9 @@ h1 {
 h2 {
 	@apply font-bold text-xl mb-2;
 }
+h3 {
+	@apply font-bold text-lg mb-2;
+}
 .dice-container-box {
 	@apply flex flex-wrap h-20 min-w-[10rem] max-w-fit border border-dashed border-white rounded p-2 mx-1 my-2;
 }
@@ -290,4 +293,45 @@ button.wrong,
 }
 .over {
 	@apply border-red-500;
+}
+.directions-content {
+	@apply hidden transition-all;
+}
+div.directions-content.open {
+	@apply block rounded-box mt-2 px-2 py-1;
+}
+.scoring-grid,
+.ten-grand-scoring-grid {
+	@apply border border-dashed rounded border-white my-2 p-2;
+}
+.scoring-grid-row,
+.ten-grand-individual-scores .individual,
+.ten-grand-multiple-scores .multiple {
+	@apply flex flex-wrap px-2 border-b border-dotted border-white;
+}
+.ten-grand-individual-scores .individuals-header,
+.ten-grand-multiple-scores .multiples-header {
+	@apply flex flex-wrap  bg-slate-800 text-white py-1 px-2 my-1;
+}
+.ten-grand-individual-scores .roll {
+	@apply flex-grow;
+}
+.ten-grand-multiple-scores .multiples-header,
+.ten-grand-multiple-scores .multiple {
+	@apply justify-between;
+}
+.scoring-grid-row .category {
+	@apply w-32;
+}
+.scoring-grid-row .description {
+	@apply flex-grow;
+}
+.scoring-grid.row .score {
+	@apply w-24 text-right;
+}
+.directions-content strong {
+	@apply mr-2;
+}
+.directions-content a {
+	@apply font-bold;
 }

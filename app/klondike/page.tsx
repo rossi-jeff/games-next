@@ -12,6 +12,7 @@ import PlayingCard from '@/components/playing-card'
 import { apiUrl } from '@/lib/api-url'
 import { buildRequestHeaders } from '@/lib/build-request-headers'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import KlondikeDirections from '../../components/klondike-directions'
 
 export default function KlondikeGame() {
 	let deck: Deck | undefined
@@ -436,7 +437,11 @@ export default function KlondikeGame() {
 
 	return (
 		<div id="klondike-game" className="m-2">
-			<h1>Klondike</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Klondike</h1>
+				<Link href="/klondike/scores">Scores</Link>
+			</div>
+
 			<div className="flex flex-wrap justify-between">
 				<div>
 					{klondike.Status != GameStatus.Playing && (
@@ -525,7 +530,7 @@ export default function KlondikeGame() {
 					))}
 				</div>
 			</div>
-			<div id="tableau-cells" className="flex flex-wrap justify-between">
+			<div id="tableau-cells" className="flex flex-wrap justify-between mb-4">
 				{tableauID.map((id) => (
 					<div
 						key={id}
@@ -550,7 +555,7 @@ export default function KlondikeGame() {
 					</div>
 				))}
 			</div>
-			<Link href="/klondike/scores">Scores</Link>
+			{klondike.Status != GameStatus.Playing && <KlondikeDirections />}
 		</div>
 	)
 }

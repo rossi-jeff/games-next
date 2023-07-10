@@ -16,6 +16,7 @@ import { SeaBattleTurn } from '@/types/sea-battle-turn.type'
 import SeaBattlePlayerTurn from './sea-battle-player-turn'
 import SeaBattleOpponentTurn from './sea-battle-opponent-turn'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import SeaBattleDirections from '../../components/sea-battle-directions'
 
 export default function SeaBattleGame() {
 	const [seaBattle, setSeaBattle] = useState<SeaBattle>({})
@@ -198,7 +199,11 @@ export default function SeaBattleGame() {
 
 	return (
 		<div className="sea-battle-game m-2">
-			<h1>Sea Battle</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Sea Battle</h1>
+				<Link href="/seabattle/scores">Scores</Link>
+			</div>
+
 			{seaBattle.Status == GameStatus.Playing &&
 				shipsToPlace.length == 0 &&
 				seaBattle.Axis &&
@@ -237,7 +242,7 @@ export default function SeaBattleGame() {
 			{seaBattle.Status != GameStatus.Playing && (
 				<SeaBattleGameOptions newGame={newGame} />
 			)}
-			<Link href="/seabattle/scores">Scores</Link>
+			{seaBattle.Status != GameStatus.Playing && <SeaBattleDirections />}
 		</div>
 	)
 }

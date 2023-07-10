@@ -12,6 +12,7 @@ import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
 import { FreeCell } from '../../types/free-cell.type'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import FreeCellDirections from '../../components/free-cell-directions'
 
 export default function FreeCellGame() {
 	let deck: Deck | undefined
@@ -486,7 +487,11 @@ export default function FreeCellGame() {
 
 	return (
 		<div id="free-cell-game" className="m-2">
-			<h1>Free Cell</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Free Cell</h1>
+				<Link href="/freecell/scores">Scores</Link>
+			</div>
+
 			<div className="flex flex-wrap justify-between">
 				<div>
 					{freeCell.Status != GameStatus.Playing && (
@@ -566,7 +571,7 @@ export default function FreeCellGame() {
 					))}
 				</div>
 			</div>
-			<div id="tableau-cells" className="flex flex-wrap justify-between">
+			<div id="tableau-cells" className="flex flex-wrap justify-between mb-4">
 				{tableauID.map((id) => (
 					<div
 						key={id}
@@ -591,7 +596,7 @@ export default function FreeCellGame() {
 					</div>
 				))}
 			</div>
-			<Link href="/freecell/scores">Scores</Link>
+			{freeCell.Status != GameStatus.Playing && <FreeCellDirections />}
 		</div>
 	)
 }

@@ -8,6 +8,7 @@ import { apiUrl } from '../../lib/api-url'
 import { buildRequestHeaders } from '../../lib/build-request-headers'
 import YachtScoreCard from './yacht-score-card'
 import useStorage, { SessionData, sessionKey } from '../../lib/session-storage'
+import YachtDirections from '../../components/yacht-directions'
 
 export default function YachtGame() {
 	const [yacht, setYacht] = useState<Yacht>({})
@@ -49,22 +50,26 @@ export default function YachtGame() {
 
 	return (
 		<div className="m-2">
-			<h1>Yacht</h1>
+			<div className="flex flex-wrap justify-between">
+				<h1>Yacht</h1>
+				<Link href="/yacht/scores">Scores</Link>
+			</div>
+
 			{yacht && yacht.NumTurns != undefined && yacht.NumTurns < 12 ? (
 				<YachtPlaying yacht={yacht} reloadGame={reloadGame} />
 			) : (
-				<button onClick={createGame} className="mb-2">
-					New Game
-				</button>
+				<>
+					<button onClick={createGame} className="mb-2">
+						New Game
+					</button>
+					<YachtDirections />
+				</>
 			)}
 			{yacht.Total != undefined &&
 				yacht.turns != undefined &&
 				yacht.turns.length > 0 && (
 					<YachtScoreCard total={yacht.Total} turns={yacht.turns} />
 				)}
-			<div>
-				<Link href="/yacht/scores">Scores</Link>
-			</div>
 		</div>
 	)
 }
