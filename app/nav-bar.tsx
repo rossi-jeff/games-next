@@ -21,6 +21,7 @@ export default function NavBar() {
 		{ path: '/hangman', text: 'Hang Man' },
 		{ path: '/concentration', text: 'Concentration' },
 		{ path: '/tengrand', text: 'Ten Grand' },
+		{ path: '/pokersquares', text: 'Poker Squares' },
 	]
 	const pathName = usePathname()
 
