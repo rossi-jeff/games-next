@@ -5,6 +5,7 @@ import { Card } from "@/lib/card.class";
 import { Deck } from "@/lib/deck.class";
 import useStorage, { SessionData, sessionKey } from "@/lib/session-storage";
 import { CardContainerType } from "@/types/card-container.type";
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 export default function SpiderPage() {
@@ -286,7 +287,10 @@ export default function SpiderPage() {
 
   return (
     <div id="spider-game" className="m-2">
-      <h1>Spider</h1>
+      <div className="flex flex-wrap justify-between">
+        <h1>Spider</h1>
+        <Link href="/spider/scores">Scores</Link>
+      </div>
       <div className="flex">
         <label htmlFor="suits" className="font-bold">
           Suits
