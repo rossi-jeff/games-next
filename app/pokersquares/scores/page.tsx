@@ -42,7 +42,7 @@ export default function PokerSquaresScores() {
 					<div className="score-header">
 						<div className="cell-left">User</div>
 						<div className="cell-center">Status</div>
-						<div className="cell-right">Moves</div>
+						<div className="cell-right">Score</div>
 					</div>
 					{Items.map((pokerSquare: PokerSquare) => (
 						<PokerSquaresScoreRow
